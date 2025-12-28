@@ -1,0 +1,4644 @@
+<!DOCTYPE html>
+<html lang="en" data-color-scheme="light">
+<head>
+  <meta charset="UTF-8" />
+  <title>Time Tracker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    /* ====== PERPLEXITY DESIGN SYSTEM (TRIMMED TO ESSENTIALS) ====== */
+    :root {
+      --color-white: rgba(255, 255, 255, 1);
+      --color-black: rgba(0, 0, 0, 1);
+      --color-cream-50: rgba(252, 252, 249, 1);
+      --color-cream-100: rgba(255, 255, 253, 1);
+      --color-gray-200: rgba(245, 245, 245, 1);
+      --color-gray-300: rgba(167, 169, 169, 1);
+      --color-gray-400: rgba(119, 124, 124, 1);
+      --color-slate-500: rgba(98, 108, 113, 1);
+      --color-brown-600: rgba(94, 82, 64, 1);
+      --color-charcoal-700: rgba(31, 33, 33, 1);
+      --color-charcoal-800: rgba(38, 40, 40, 1);
+      --color-slate-900: rgba(19, 52, 59, 1);
+      --color-teal-300: rgba(50, 184, 198, 1);
+      --color-teal-400: rgba(45, 166, 178, 1);
+      --color-teal-500: rgba(33, 128, 141, 1);
+      --color-teal-600: rgba(29, 116, 128, 1);
+      --color-teal-700: rgba(26, 104, 115, 1);
+      --color-teal-800: rgba(41, 150, 161, 1);
+      --color-red-400: rgba(255, 84, 89, 1);
+      --color-red-500: rgba(192, 21, 47, 1);
+      --color-orange-400: rgba(230, 129, 97, 1);
+      --color-orange-500: rgba(168, 75, 47, 1);
+
+      --color-brown-600-rgb: 94, 82, 64;
+      --color-teal-500-rgb: 33, 128, 141;
+      --color-slate-900-rgb: 19, 52, 59;
+      --color-slate-500-rgb: 98, 108, 113;
+      --color-red-500-rgb: 192, 21, 47;
+      --color-red-400-rgb: 255, 84, 89;
+      --color-orange-500-rgb: 168, 75, 47;
+      --color-orange-400-rgb: 230, 129, 97;
+
+      --color-background: var(--color-cream-50);
+      --color-surface: var(--color-cream-100);
+      --color-text: var(--color-slate-900);
+      --color-text-secondary: var(--color-slate-500);
+      --color-primary: var(--color-teal-500);
+      --color-primary-hover: var(--color-teal-600);
+      --color-primary-active: var(--color-teal-700);
+      --color-secondary: rgba(var(--color-brown-600-rgb), 0.12);
+      --color-secondary-hover: rgba(var(--color-brown-600-rgb), 0.2);
+      --color-secondary-active: rgba(var(--color-brown-600-rgb), 0.25);
+      --color-border: rgba(var(--color-brown-600-rgb), 0.2);
+      --color-btn-primary-text: var(--color-cream-50);
+      --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
+      --color-card-border-inner: rgba(var(--color-brown-600-rgb), 0.12);
+      --color-error: var(--color-red-500);
+      --color-success: var(--color-teal-500);
+      --color-warning: var(--color-orange-500);
+      --color-info: var(--color-slate-500);
+      --color-focus-ring: rgba(var(--color-teal-500-rgb), 0.4);
+
+      --color-success-rgb: var(--color-teal-500-rgb);
+      --color-error-rgb: var(--color-red-500-rgb);
+      --color-warning-rgb: var(--color-orange-500-rgb);
+      --color-info-rgb: var(--color-slate-500-rgb);
+
+      --font-family-base: "FKGroteskNeue", "Geist", "Inter", -apple-system,
+        BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-family-mono: "Berkeley Mono", ui-monospace, SFMono-Regular, Menlo,
+        Monaco, Consolas, monospace;
+      --font-size-xs: 11px;
+      --font-size-sm: 12px;
+      --font-size-base: 14px;
+      --font-size-md: 14px;
+      --font-size-lg: 16px;
+      --font-size-xl: 18px;
+      --font-size-2xl: 20px;
+      --font-size-3xl: 24px;
+      --font-size-4xl: 30px;
+      --font-weight-normal: 400;
+      --font-weight-medium: 500;
+      --font-weight-semibold: 550;
+      --font-weight-bold: 600;
+      --line-height-tight: 1.2;
+      --line-height-normal: 1.5;
+      --letter-spacing-tight: -0.01em;
+
+      --space-0: 0;
+      --space-1: 1px;
+      --space-2: 2px;
+      --space-4: 4px;
+      --space-6: 6px;
+      --space-8: 8px;
+      --space-10: 10px;
+      --space-12: 12px;
+      --space-16: 16px;
+      --space-20: 20px;
+      --space-24: 24px;
+      --space-32: 32px;
+
+      --radius-sm: 6px;
+      --radius-base: 8px;
+      --radius-md: 10px;
+      --radius-lg: 12px;
+      --radius-full: 9999px;
+
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.04),
+        0 2px 4px -1px rgba(0, 0, 0, 0.02);
+
+      --container-sm: 640px;
+      --container-md: 768px;
+      --container-lg: 1024px;
+      --container-xl: 1280px;
+
+      --focus-ring: 0 0 0 3px var(--color-focus-ring);
+      --focus-outline: 2px solid var(--color-primary);
+      --status-bg-opacity: 0.15;
+      --status-border-opacity: 0.25;
+    }
+
+    html {
+      font-size: var(--font-size-base);
+      font-family: var(--font-family-base);
+      line-height: var(--line-height-normal);
+      color: var(--color-text);
+      background-color: var(--color-background);
+      -webkit-font-smoothing: antialiased;
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: inherit;
+    }
+
+    h1, h2, h3, h4 {
+      margin: 0;
+      font-weight: var(--font-weight-semibold);
+      line-height: var(--line-height-tight);
+      color: var(--color-text);
+      letter-spacing: var(--letter-spacing-tight);
+    }
+
+    h1 { font-size: var(--font-size-3xl); }
+    h2 { font-size: var(--font-size-2xl); }
+    h3 { font-size: var(--font-size-xl); }
+    h4 { font-size: var(--font-size-lg); }
+
+    p {
+      margin: 0 0 var(--space-12) 0;
+    }
+
+    a {
+      color: var(--color-primary);
+      text-decoration: none;
+      transition: color 150ms ease;
+    }
+
+    a:hover {
+      color: var(--color-primary-hover);
+    }
+
+    .container {
+      width: 100%;
+      margin: 0 auto;
+      padding: var(--space-16);
+    }
+
+    @media (min-width: 768px) {
+      .container {
+        max-width: var(--container-lg);
+      }
+    }
+
+    .app-shell {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background: radial-gradient(circle at top left, rgba(33,128,141,0.05), transparent 55%),
+                  radial-gradient(circle at bottom right, rgba(94,82,64,0.08), transparent 55%);
+    }
+
+    .app-header {
+      padding: var(--space-16) var(--space-16) var(--space-8);
+    }
+
+    .app-title-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: var(--space-8);
+    }
+
+    .app-title-row h1 {
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-8);
+    }
+
+    .badge {
+      font-size: var(--font-size-xs);
+      padding: 2px 6px;
+      border-radius: var(--radius-full);
+      background: rgba(var(--color-teal-500-rgb), 0.08);
+      color: var(--color-primary);
+      border: 1px solid rgba(var(--color-teal-500-rgb), 0.25);
+    }
+
+    .app-main {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 220px minmax(0, 1fr);
+      gap: var(--space-16);
+      padding: 0 var(--space-16) var(--space-16);
+    }
+
+    @media (max-width: 900px) {
+      .app-main {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .sidebar {
+      background: rgba(var(--color-brown-600-rgb), 0.04);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--color-card-border);
+      box-shadow: var(--shadow-sm);
+      padding: var(--space-12);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-8);
+    }
+
+    .sidebar-section-title {
+      font-size: var(--font-size-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-text-secondary);
+      margin-bottom: var(--space-4);
+    }
+
+    .nav-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+
+    .nav-item {
+      display: flex;
+    }
+
+    .nav-button {
+      cursor: pointer;
+      border-radius: var(--radius-base);
+      border: 1px solid transparent;
+      background: transparent;
+      padding: 6px 10px;
+      font-size: var(--font-size-sm);
+      color: var(--color-text-secondary);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      text-align: left;
+      transition: background 150ms ease, border-color 150ms ease, color 150ms ease;
+    }
+
+    .nav-button span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-button .nav-hotkey {
+      font-family: var(--font-family-mono);
+      font-size: var(--font-size-xs);
+      opacity: 0.7;
+    }
+
+    .nav-button.nav-active {
+      background: var(--color-surface);
+      border-color: var(--color-border);
+      color: var(--color-text);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .nav-button:hover {
+      background: rgba(var(--color-brown-600-rgb), 0.06);
+    }
+
+    .status-pill {
+      font-size: var(--font-size-xs);
+      padding: 2px 6px;
+      border-radius: var(--radius-full);
+      background: rgba(var(--color-success-rgb), 0.12);
+      color: var(--color-success);
+      border: 1px solid rgba(var(--color-success-rgb), 0.25);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-8) var(--space-16);
+      border-radius: var(--radius-base);
+      font-size: var(--font-size-sm);
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      transition: background 150ms ease, box-shadow 150ms ease, transform 80ms ease;
+      background: var(--color-primary);
+      color: var(--color-btn-primary-text);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn:hover {
+      background: var(--color-primary-hover);
+      box-shadow: var(--shadow-md);
+    }
+
+    .btn:active {
+      background: var(--color-primary-active);
+      transform: translateY(1px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn.secondary {
+      background: var(--color-secondary);
+      color: var(--color-text);
+    }
+
+    .btn.secondary:hover {
+      background: var(--color-secondary-hover);
+    }
+
+    .btn.text {
+      background: transparent;
+      color: var(--color-text-secondary);
+      box-shadow: none;
+      padding: 4px 8px;
+    }
+
+    .btn.text:hover {
+      background: rgba(var(--color-brown-600-rgb), 0.06);
+    }
+
+    .btn.sm {
+      padding: 4px 10px;
+      font-size: var(--font-size-xs);
+      border-radius: var(--radius-sm);
+    }
+
+    .btn.full {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .card {
+      background: var(--color-surface);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--color-card-border);
+      box-shadow: var(--shadow-sm);
+      padding: var(--space-16);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      gap: var(--space-8);
+      align-items: baseline;
+      margin-bottom: var(--space-8);
+    }
+
+    .card-header h2 {
+      font-size: var(--font-size-lg);
+    }
+
+    .card-subtitle {
+      font-size: var(--font-size-xs);
+      color: var(--color-text-secondary);
+    }
+
+    .card-section {
+      margin-top: var(--space-16);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: var(--space-12);
+      align-items: flex-end;
+      margin-bottom: var(--space-12);
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .form-label {
+      font-size: var(--font-size-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-text-secondary);
+    }
+
+    .form-control {
+      display: block;
+      width: 100%;
+      padding: 6px 8px;
+      font-size: var(--font-size-sm);
+      line-height: 1.4;
+      color: var(--color-text);
+      background-color: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-base);
+      transition: border-color 150ms ease, box-shadow 150ms ease;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      box-shadow: var(--focus-ring);
+    }
+
+    .form-control[type="time"] {
+      font-family: var(--font-family-mono);
+    }
+
+    .form-hint {
+      font-size: var(--font-size-xs);
+      color: var(--color-text-secondary);
+    }
+
+    textarea.form-control {
+      min-height: 70px;
+      resize: vertical;
+    }
+
+    .table-wrapper {
+      margin-top: var(--space-12);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--color-card-border-inner);
+      overflow: hidden;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: var(--font-size-xs);
+    }
+
+    thead {
+      background: rgba(var(--color-brown-600-rgb), 0.04);
+    }
+
+    th, td {
+      padding: 4px 6px;
+      border-bottom: 1px solid rgba(var(--color-brown-600-rgb), 0.12);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      font-weight: 500;
+      color: var(--color-text-secondary);
+      white-space: nowrap;
+    }
+
+    tr:nth-child(even) td {
+      background: rgba(var(--color-brown-600-rgb), 0.02);
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 6px;
+      border-radius: var(--radius-full);
+      font-size: var(--font-size-xs);
+      background: rgba(var(--color-brown-600-rgb), 0.06);
+      color: var(--color-text-secondary);
+    }
+
+    .pill {
+      border-radius: var(--radius-full);
+      padding: 2px 8px;
+      font-size: var(--font-size-xs);
+      background: rgba(var(--color-teal-500-rgb), 0.08);
+      color: var(--color-primary);
+    }
+
+    .pill.muted {
+      background: rgba(var(--color-brown-600-rgb), 0.05);
+      color: var(--color-text-secondary);
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: var(--space-12);
+      margin-top: var(--space-8);
+    }
+
+    .summary-item {
+      padding: 8px 10px;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(var(--color-brown-600-rgb), 0.16);
+      background: rgba(255, 255, 255, 0.7);
+    }
+
+    .summary-item-title {
+      font-size: var(--font-size-xs);
+      color: var(--color-text-secondary);
+      margin-bottom: 4px;
+    }
+
+    .summary-item-value {
+      font-size: var(--font-size-md);
+      font-weight: 550;
+    }
+
+    .summary-item-meta {
+      font-size: var(--font-size-xs);
+      color: var(--color-text-secondary);
+      margin-top: 2px;
+    }
+
+    .layout-split {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: var(--space-12);
+      margin-top: var(--space-12);
+      align-items: start;
+    }
+
+    .layout-split > div {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .layout-split .table-wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .layout-split table {
+      height: 100%;
+    }
+
+    .layout-split tbody {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .layout-split tr {
+      display: flex;
+      width: 100%;
+    }
+
+    .layout-split td {
+      padding: 4px 6px;
+      flex: 1;
+      min-height: 28px;
+      display: flex;
+      align-items: center;
+    }
+
+    .layout-split th {
+      padding: 4px 6px;
+      flex: 1;
+      min-height: 28px;
+      display: flex;
+      align-items: center;
+    }
+
+    .layout-split td:first-child,
+    .layout-split th:first-child {
+      flex: 0 0 70px;
+      width: 70px;
+    }
+
+    .layout-split td:last-child {
+      flex: 0 0 50px;
+      width: 50px;
+      justify-content: center;
+    }
+
+    @media (max-width: 900px) {
+      .layout-split {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .muted {
+      color: var(--color-text-secondary);
+    }
+
+    .error-text {
+      color: var(--color-error);
+      font-size: var(--font-size-xs);
+      margin-top: 2px;
+    }
+
+    .notes-area {
+      margin-top: var(--space-8);
+    }
+
+    .notes-area textarea {
+      font-size: var(--font-size-sm);
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 4px;
+    }
+
+    .chip {
+      padding: 2px 6px;
+      border-radius: var(--radius-full);
+      font-size: var(--font-size-xs);
+      background: rgba(var(--color-brown-600-rgb), 0.06);
+      cursor: default;
+    }
+
+    .chip.highlight {
+      background: rgba(var(--color-teal-500-rgb), 0.14);
+      color: var(--color-primary);
+      border: 1px solid rgba(var(--color-teal-500-rgb), 0.4);
+    }
+
+    .range-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-8);
+      align-items: center;
+      margin-bottom: var(--space-8);
+    }
+
+    .range-controls .btn.sm {
+      padding-inline: 8px;
+    }
+
+    .range-controls input[type="date"] {
+      font-size: var(--font-size-sm);
+      padding: 4px 6px;
+      border-radius: var(--radius-base);
+      border: 1px solid var(--color-border);
+    }
+
+    .range-controls input[type="date"]:focus {
+      outline: none;
+      box-shadow: var(--focus-ring);
+      border-color: var(--color-primary);
+    }
+
+    .app-footer {
+      padding: 8px 16px 16px;
+      font-size: var(--font-size-xs);
+      color: var(--color-text-secondary);
+      display: flex;
+      justify-content: space-between;
+      gap: var(--space-8);
+      flex-wrap: wrap;
+    }
+
+    .linkish {
+      cursor: pointer;
+      text-decoration: underline;
+      text-decoration-style: dotted;
+    }
+
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .modal-dialog {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      padding: var(--space-16);
+      width: 90%;
+      max-width: 400px;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+
+    .modal-header {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-semibold);
+      margin-bottom: var(--space-12);
+    }
+
+    .modal-body {
+      margin-bottom: var(--space-16);
+    }
+
+    .modal-footer {
+      display: flex;
+      gap: var(--space-8);
+      justify-content: flex-end;
+    }
+
+    .clickable-row {
+      cursor: pointer;
+      transition: background 150ms ease;
+    }
+
+    .clickable-row:hover {
+      background: rgba(var(--color-teal-500-rgb), 0.06) !important;
+    }
+
+    .time-picker-group {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      width: 100%;
+    }
+
+    .time-picker-hour,
+    .time-picker-minute {
+      flex: 0 0 auto;
+      width: 50px;
+      padding: 6px 4px;
+      font-size: var(--font-size-sm);
+      text-align: center;
+      font-family: var(--font-family-mono);
+    }
+
+    .time-picker-sep {
+      font-weight: 600;
+      color: var(--color-text);
+    }
+
+    .time-picker-modal {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-12);
+    }
+
+    .time-picker-scroll-row {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: var(--space-8);
+      align-items: center;
+    }
+
+    .time-picker-scroll-container {
+      height: 150px;
+      overflow-y: scroll;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-base);
+      background: var(--color-background);
+      position: relative;
+    }
+
+    .time-picker-scroll-container::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .time-picker-scroll-container::-webkit-scrollbar-track {
+      background: rgba(var(--color-brown-600-rgb), 0.08);
+      border-radius: 3px;
+    }
+
+    .time-picker-scroll-container::-webkit-scrollbar-thumb {
+      background: rgba(var(--color-brown-600-rgb), 0.3);
+      border-radius: 3px;
+    }
+
+    .time-picker-scroll-item {
+      padding: 8px 12px;
+      text-align: center;
+      cursor: pointer;
+      transition: background 100ms ease;
+      font-family: var(--font-family-mono);
+    }
+
+    .time-picker-scroll-item.selected {
+      background: rgba(var(--color-teal-500-rgb), 0.15);
+      color: var(--color-primary);
+      font-weight: 550;
+    }
+
+    .time-picker-scroll-item:hover {
+      background: rgba(var(--color-brown-600-rgb), 0.08);
+    }
+
+    .time-picker-label {
+      font-size: var(--font-size-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-text-secondary);
+      text-align: center;
+    }
+
+    .time-picker-buttons {
+      display: flex;
+      gap: var(--space-8);
+      justify-content: flex-end;
+      padding-top: var(--space-8);
+      border-top: 1px solid var(--color-border);
+    }
+
+    .template-slot-description {
+      font-size: var(--font-size-xs);
+      color: var(--color-text-secondary);
+      max-width: 100px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .button-highlight {
+      background: var(--color-primary) !important;
+      color: var(--color-btn-primary-text) !important;
+    }
+  
+      /* Add Entry button prompt states */
+      .btn.inactive-add {
+        background: rgba(var(--color-brown-600-rgb), 0.18) !important;
+        color: var(--color-text-secondary) !important;
+        box-shadow: none !important;
+      }
+      .btn.inactive-add:hover {
+        background: rgba(var(--color-brown-600-rgb), 0.22) !important;
+      }
+      .btn.inactive-add:active {
+        background: rgba(var(--color-brown-600-rgb), 0.28) !important;
+        transform: translateY(1px);
+      }
+
+    
+
+    /* ===== Compact + sticky New Time Entry bar ===== */
+    .entry-sticky {
+      position: sticky;
+      top: 0;
+      z-index: 80;
+      background: var(--color-surface);
+      border: 1px solid rgba(var(--color-brown-600-rgb), 0.14);
+      border-radius: var(--radius-md);
+      padding: 8px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .entry-row {
+      display: grid;
+      grid-template-columns: 132px 132px 220px 42px 1fr 110px;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .entry-cell {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      min-width: 0;
+    }
+
+    .entry-label {
+      font-size: var(--font-size-xs);
+      color: var(--color-text-secondary);
+      width: 44px;
+      flex: 0 0 auto;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      line-height: 1.1;
+    }
+
+    .entry-time-btn {
+      width: 88px;
+      padding: 6px 10px;
+      justify-content: center;
+      font-family: var(--font-family-mono);
+    }
+
+    .entry-category,
+    .entry-note {
+      width: 100% !important;
+      min-width: 0;
+      padding: 6px 8px;
+    }
+
+    .entry-add-btn {
+      width: auto;
+      padding: 6px 14px;
+      white-space: nowrap;
+    }
+
+    .entry-add-cat {
+      padding: 6px 10px;
+      line-height: 1;
+    }
+
+    /* Sticky can fail if any ancestor becomes a scroll container; keep it visible */
+    #view-container { overflow: visible; }
+
+    @media (max-width: 900px) {
+      .entry-row {
+        grid-template-columns: 1fr 1fr;
+      }
+      .entry-add-cat { justify-self: start; }
+      .entry-add-btn { justify-self: end; }
+    }
+
+
+    /* ===== Added: Day Entry rolling container (fix sticky) ===== */
+    .day-entry-scroll{
+  max-height: calc(100vh - 320px);
+  overflow: auto;
+  padding-right: 6px;
+}
+
+.day-entry-top{
+  margin-bottom: var(--space-12);
+}
+
+.actual-cell{
+  cursor: pointer;
+}
+.actual-cell:hover{
+  background: rgba(var(--color-teal-500-rgb), 0.08);
+}
+
+    /* ===== Added: Starred category highlighting + stronger diffs ===== */
+    .summary-item.starred {
+      border: 2px solid rgba(var(--color-teal-500-rgb), 0.55) !important;
+      background: rgba(var(--color-teal-500-rgb), 0.08) !important;
+    }
+    .summary-item-title {
+      font-weight: 650;
+      color: var(--color-text);
+    }
+    .diff-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 1px 6px;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(var(--color-brown-600-rgb), 0.18);
+      background: rgba(var(--color-brown-600-rgb), 0.06);
+      font-family: var(--font-family-mono);
+      font-weight: 650;
+    }
+    .diff-pill.over {
+      border-color: rgba(var(--color-error-rgb), 0.28);
+      background: rgba(var(--color-error-rgb), 0.10);
+      color: var(--color-error);
+    }
+    .diff-pill.under {
+      border-color: rgba(var(--color-success-rgb), 0.28);
+      background: rgba(var(--color-success-rgb), 0.10);
+      color: var(--color-success);
+    }
+    .star-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 1px 6px;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(var(--color-teal-500-rgb), 0.35);
+      background: rgba(var(--color-teal-500-rgb), 0.10);
+      color: var(--color-primary);
+      font-size: var(--font-size-xs);
+      margin-left: 6px;
+    }
+
+    /* ===== Added: Templates scroll box larger ===== */
+    .templates-scroll {
+      max-height: 60vh;
+      overflow: auto;
+    }
+
+  
+
+/* ===== Daily Summary: goal highlighting ===== */
+.summary-item.goal-ok{
+  border: 2px solid rgba(var(--color-teal-500-rgb), 0.35);
+  background: rgba(var(--color-teal-500-rgb), 0.07);
+}
+.summary-item.goal-bad{
+  border: 2px solid rgba(var(--color-red-500-rgb), 0.25);
+  background: rgba(var(--color-red-500-rgb), 0.06);
+}
+.goal-compare{
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  font-weight: 650;
+  font-size: 12px;
+  line-height: 1.2;
+}
+.goal-compare.ok{
+  background: rgba(var(--color-teal-500-rgb), 0.10);
+  color: var(--color-primary);
+  border: 1px solid rgba(var(--color-teal-500-rgb), 0.25);
+}
+.goal-compare.bad{
+  background: rgba(var(--color-red-500-rgb), 0.10);
+  color: var(--color-red-500);
+  border: 1px solid rgba(var(--color-red-500-rgb), 0.20);
+}
+
+
+
+    /* === Diff highlighting (goal vs actual, plan vs actual) === */
+    .diff-pill{
+      display:inline-block;
+      padding:2px 6px;
+      border-radius:999px;
+      font-size:11px;
+      line-height:1.2;
+      border:1px solid rgba(0,0,0,0.08);
+      background:rgba(167,169,169,0.12);
+    }
+    .diff-pos{ background:rgba(var(--color-teal-500-rgb),0.14); border-color:rgba(var(--color-teal-500-rgb),0.35); }
+    .diff-neg{ background:rgba(var(--color-red-400-rgb),0.12); border-color:rgba(var(--color-red-400-rgb),0.35); }
+
+    /* === Tagged categories (checked/tag field) === */
+    .tagged-accent{
+      background: rgba(var(--color-orange-500-rgb), 0.10) !important;
+      border: 1px solid rgba(var(--color-orange-500-rgb), 0.35) !important;
+    }
+    .tagged-cell{
+      background: rgba(var(--color-orange-500-rgb), 0.06);
+    }
+
+    /* === Permanent edit panels (Templates + Categories) === */
+    .split-editor{
+      display:grid;
+      grid-template-columns: 1.7fr 1fr;
+      gap:12px;
+      align-items:start;
+    }
+    .editor-panel{
+      border:1px solid rgba(0,0,0,0.08);
+      border-radius:12px;
+      padding:12px;
+      background: var(--color-surface);
+      min-height: 240px;
+    }
+    .editor-title{
+      font-size:13px;
+      font-weight:650;
+      margin-bottom:8px;
+    }
+    .click-row{ cursor:pointer; }
+    .click-row:hover{ background: rgba(var(--color-teal-500-rgb), 0.06); }
+    .row-selected{ outline: 2px solid rgba(var(--color-teal-500-rgb), 0.45); outline-offset:-2px; }
+
+    /* Make Categories screen stretch vertically */
+    .card-fill{
+      min-height: calc(100vh - 120px);
+      display:flex;
+      flex-direction:column;
+    }
+    .card-fill .card-section.grow{
+      flex:1;
+    }
+
+    /* Shorten template descriptions in table */
+    .template-slot-description{
+      display:inline-block;
+      max-width: 180px;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+      vertical-align:bottom;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="app-header">
+      <div class="app-title-row">
+        <h1>
+          Time Tracker
+          <span class="badge">PC prototype</span>
+        </h1>
+        <div class="chip-row">
+          <span class="chip">Data: SQLite (file-based)</span>
+          <span class="chip">Day: 00:00–24:00</span>
+          <span class="chip">Intervals: arbitrary</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="app-main">
+      <aside class="sidebar">
+        <div>
+          <div class="sidebar-section-title">Main</div>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <button class="nav-button nav-active" data-view="day-entry">
+                <span>
+                  <span>Day Entry / View</span>
+                </span>
+                <span class="nav-hotkey">D</span>
+              </button>
+            </li>
+            <li class="nav-item">
+              <button class="nav-button" data-view="multi-day">
+                <span>
+                  <span>Multi‑day Summary</span>
+                </span>
+                <span class="nav-hotkey">M</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="sidebar-section-title">Configuration</div>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <button class="nav-button" data-view="templates">
+                <span>
+                  <span>Day Templates</span>
+                </span>
+                <span class="nav-hotkey">T</span>
+              </button>
+            </li>
+            <li class="nav-item">
+              <button class="nav-button" data-view="categories">
+                <span>
+                  <span>Categories & Goals</span>
+                </span>
+                <span class="nav-hotkey">C</span>
+              </button>
+            </li>
+            <li class="nav-item">
+              <button class="nav-button" data-view="settings">
+                <span>
+                  <span>Settings / Data</span>
+                </span>
+                <span class="nav-hotkey">S</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <div style="margin-top:auto;">
+          <div class="sidebar-section-title">Status</div>
+          <div class="chip-row">
+            <span class="chip" id="status-db-location-label">Data not initialized</span>
+            <span class="chip muted" id="status-day-type-label">No day selected</span>
+          </div>
+          <div style="margin-top:8px;">
+            <button class="btn sm full secondary" id="btn-backup">Backup (Folder)</button>
+          </div>
+          <div class="form-hint" style="margin-top:6px;"><strong>Sidebar Backup:</strong> Quick download of all data. Same as Settings > Backup (JSON). Use either button.</div>
+        </div>
+      </aside>
+
+      <section id="view-container">
+        <!-- Views will be injected here by JS -->
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <div>
+        Prototype layout only – actual SQLite storage and Excel export will be wired in next iteration.
+      </div>
+      <div>
+        Shortcuts: <span class="muted">D = Day • M = Multi‑day • T = Templates • C = Categories • S = Settings</span>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+
+  // Mobile Detection
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|Tablet/i.test(navigator.userAgent) || window.innerWidth < 800;
+
+  // --- MOBILE WORKFLOW FUNCTIONS ---
+
+  function downloadMobileBuffer() {
+    (async () => {
+      try {
+        if (typeof isMobile !== 'undefined' && isMobile && TTMobile && TTMobile.hasFSAccessAPI()) {
+          let ok = await TTMobile.writeMobileBufferToSyncFolder();
+          if (!ok) {
+            const picked = await TTMobile.pickMobileSyncFolder();
+            if (picked) ok = await TTMobile.writeMobileBufferToSyncFolder();
+          }
+          if (ok) {
+            TTMobile.clearLocalBufferData();
+            render();
+            alert('Sent to PC sync folder (mobile_buffer.json) and cleared mobile recorded data on this phone.');
+            return;
+          }
+        }
+      } catch (e) {}
+
+      const data = TTStorage.exportStateObject();
+      const json = JSON.stringify(data, null, 2);
+      const blob = new Blob([json], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'mobile_buffer.json';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    })();
+  }
+
+  function wipeMobileData() {
+    if (!confirm("Clear all mobile recorded data? Ensure you have synced to PC first!")) return;
+    state.days = {}; // Clear recorded days
+    render();
+    alert("Mobile buffer cleared.");
+  }
+
+  // --- PC WORKFLOW FUNCTIONS ---
+
+  async function importMobileData() {
+    try {
+        const rootHandle = await TTStorage.loadDirectoryHandle();
+        if (!rootHandle) {
+            alert("Error: Root folder not linked. Please 'Save' to the PC folder first.");
+            return;
+        }
+
+        // Access mobile_sync/mobile_buffer.json
+        let syncDir;
+        try {
+            syncDir = await rootHandle.getDirectoryHandle('mobile_sync');
+        } catch (e) {
+            alert("Folder 'mobile_sync' not found in your Time Tracker folder.");
+            return;
+        }
+
+        const fileHandle = await syncDir.getFileHandle('mobile_buffer.json');
+        const file = await fileHandle.getFile();
+        const text = await file.text();
+        const mobileData = JSON.parse(text);
+
+        if (!mobileData || !mobileData.state || !mobileData.state.days) {
+            alert("Invalid mobile buffer file format.");
+            return;
+        }
+
+        // MERGE LOGIC
+        let importCount = 0;
+        const mobileDays = mobileData.state.days;
+
+        // Loop through dates in mobile data
+        Object.keys(mobileDays).forEach(dateKey => {
+            const mobileDay = mobileDays[dateKey];
+            const day = ensureDay(dateKey);
+            const existingInts = Array.isArray(day.intervals) ? day.intervals : (day.intervals = []);
+            ensureIntervalIds(day);
+
+            const normTime = (v) => normalizeTimeToHHMM(v);
+            const normCat = (v) => (v === null || v === undefined) ? '' : String(v).trim();
+            const normNote = (v) => (v === null || v === undefined) ? '' : String(v).trim();
+
+            (mobileDay.intervals || []).forEach(raw => {
+              const start = normTime(raw.start);
+              const end = normTime(raw.end);
+              const categoryId = normCat(raw.categoryId);
+              const note = normNote(raw.note);
+              if (!start || !end || !categoryId) return;
+
+              const coarse = existingInts.find(ex => normTime(ex.start) === start && normTime(ex.end) === end && normCat(ex.categoryId) === categoryId);
+              if (coarse) {
+                const exNote = normNote(coarse.note);
+                if (!exNote && note) {
+                  coarse.note = note;
+                  importCount++;
+                }
+                return;
+              }
+
+              existingInts.push({
+                id: raw.id || makeIntervalId(),
+                start,
+                end,
+                categoryId,
+                note
+              });
+              importCount++;
+            });
+
+            existingInts.sort((a, b) => {
+              const as = timeToMinutes(a.start);
+              const bs = timeToMinutes(b.start);
+              if (!Number.isFinite(as) || !Number.isFinite(bs)) return 0;
+              if (as !== bs) return as - bs;
+              const ae = timeToMinutes(a.end);
+              const be = timeToMinutes(b.end);
+              if (!Number.isFinite(ae) || !Number.isFinite(be)) return 0;
+              return ae - be;
+            });
+
+            day.intervals = existingInts;
+            // Merge notes if new note exists
+            if (mobileDay.note) {
+                 state.days[dateKey].note = (state.days[dateKey].note ? state.days[dateKey].note + '; ' : '') + mobileDay.note;
+            }
+        });
+
+        if (importCount > 0) {
+            await TTStorage.persist(); // Save to PC file
+            // Clear the mobile buffer file after a successful import to avoid re-imports and to keep mobile from showing already-merged partial data.
+            try {
+              const cleared = { state: { days: {} }, clearedAt: new Date().toISOString() };
+              const writable = await fileHandle.createWritable();
+              await writable.write(JSON.stringify(cleared, null, 2));
+              await writable.close();
+            } catch (e) {
+              // Non-fatal: import already succeeded.
+            }
+            render();
+            alert(`Success! Imported ${importCount} new intervals and cleared the mobile buffer file.`);
+        } else {
+            alert("No new unique records found to import.");
+        }
+
+    } catch (err) {
+        console.error(err);
+        alert("Import Failed: " + err.message);
+    }
+  }
+
+
+    // ========= Simple in-memory model (no persistence yet) =========
+    // This prototype focuses on structure and flows; later we will replace the
+    // in-memory store with real SQLite + file-location management.
+
+    const state = {
+      // Settings
+      dataLocation: 'Not set (will point to OneDrive folder in real app)',
+
+      // Categories with optional daily goals (minutes)
+      categories: [
+        { id: 'sleep', name: 'Sleep', dailyGoalMinutes: 7 * 60 , starred: false },
+        { id: 'hygiene', name: 'Hygien', dailyGoalMinutes: 45 , starred: false },
+        { id: 'work', name: 'Work', dailyGoalMinutes: 6 * 60 , starred: false },
+        { id: 'study', name: 'Study', dailyGoalMinutes: 120 , starred: false },
+      ],
+
+      // Templates: 15-min grid between 00:00 and 24:00
+      templates: [
+        {
+          id: 'normal-weekday',
+          name: 'Normal Week Day',
+          slots: generateEmptySlots()
+        }
+      ],
+
+      // Day records, keyed by ISO date (YYYY-MM-DD)
+      days: {
+        // '2025-12-17': { ... }
+      },
+
+      selectedView: 'day-entry',
+      selectedDate: dateToLocalISO(new Date()), // today
+      selectedTemplateId: 'normal-weekday'
+    };
+
+    // Utility: generate 96 slots (15-min) between 00:00 and 24:00
+    function generateEmptySlots() {
+      const slots = [];
+      let minutes = 0;
+      for (let i = 0; i < 96; i++) {
+        const startH = String(Math.floor(minutes / 60)).padStart(2, '0');
+        const startM = String(minutes % 60).padStart(2, '0');
+        const endMinutes = minutes + 15;
+        const endH = String(Math.floor(endMinutes / 60)).padStart(2, '0');
+        const endM = String(endMinutes % 60).padStart(2, '0');
+        slots.push({
+          index: i,
+          start: `${startH}:${startM}`,
+          end: `${endH}:${endM}`,
+          categoryId: null, // planned category
+          description: '' // template slot description
+        });
+        minutes += 15;
+      }
+      return slots;
+    }
+
+    // Ensure a day record exists
+    function ensureDay(dateStr) {
+      if (!state.days[dateStr]) {
+        const fallbackTemplateId = (state.selectedTemplateId && state.templates.some(t => t.id === state.selectedTemplateId))
+          ? state.selectedTemplateId
+          : (state.templates[0] ? state.templates[0].id : 'default');
+        state.days[dateStr] = {
+          date: dateStr,
+          templateId: fallbackTemplateId,
+          intervals: [],
+          note: ''
+        };
+      } else {
+        if (!state.days[dateStr].templateId || !state.templates.some(t => t.id === state.days[dateStr].templateId)) {
+          state.days[dateStr].templateId = state.templates[0] ? state.templates[0].id : 'default';
+        }
+        if (!Array.isArray(state.days[dateStr].intervals)) state.days[dateStr].intervals = [];
+        if (state.days[dateStr].note == null) state.days[dateStr].note = '';
+      }
+      ensureIntervalIds(state.days[dateStr]);
+      return state.days[dateStr];
+    }
+
+
+function makeIntervalId() {
+  return 'intv_' + Math.random().toString(36).slice(2, 10) + '_' + Date.now().toString(36);
+}
+
+function ensureIntervalIds(day) {
+  if (!day || !Array.isArray(day.intervals)) return;
+  day.intervals.forEach(intv => {
+    if (!intv.id) intv.id = makeIntervalId();
+  });
+}
+
+function intervalsOverlap(aStartMin, aEndMin, bStartMin, bEndMin) {
+  return (aStartMin < bEndMin) && (bStartMin < aEndMin);
+}
+
+function findOverlappingIntervals(day, startHHMM, endHHMM, ignoreId = null) {
+  ensureIntervalIds(day);
+  const ns = timeToMinutes(startHHMM);
+  const ne = timeToMinutes(endHHMM);
+  if (!Number.isFinite(ns) || !Number.isFinite(ne)) return [];
+  return (day.intervals || []).filter(intv => {
+    if (ignoreId && String(intv.id) === String(ignoreId)) return false;
+    const s = timeToMinutes(intv.start);
+    const e = timeToMinutes(intv.end);
+    if (!Number.isFinite(s) || !Number.isFinite(e)) return false;
+    return intervalsOverlap(ns, ne, s, e);
+  });
+}
+
+function upsertIntervalWithOverwrite(day, interval, ignoreId = null) {
+  ensureIntervalIds(day);
+
+  const ns = timeToMinutes(interval.start);
+  const ne = timeToMinutes(interval.end);
+  if (!Number.isFinite(ns) || !Number.isFinite(ne) || ne <= ns) return;
+
+  const out = [];
+  (day.intervals || []).forEach(old => {
+    if (ignoreId && String(old.id) === String(ignoreId)) return; // remove original when editing
+
+    const os = timeToMinutes(old.start);
+    const oe = timeToMinutes(old.end);
+    if (!Number.isFinite(os) || !Number.isFinite(oe) || oe <= os) return;
+
+    if (!intervalsOverlap(ns, ne, os, oe)) {
+      out.push(old);
+      return;
+    }
+
+    // Old fully covered by new -> remove
+    if (ns <= os && ne >= oe) {
+      return;
+    }
+
+    // New fully inside old -> split old into two
+    if (os < ns && oe > ne) {
+      const left = { ...old, end: formatMinutesToHHMM(ns) };
+      const right = { ...old, id: makeIntervalId(), start: formatMinutesToHHMM(ne) };
+      if (timeToMinutes(left.end) > timeToMinutes(left.start)) out.push(left);
+      if (timeToMinutes(right.end) > timeToMinutes(right.start)) out.push(right);
+      return;
+    }
+
+    // Overlap on old's right side -> truncate old end to new start
+    if (os < ns && oe > ns && oe <= ne) {
+      const truncated = { ...old, end: formatMinutesToHHMM(ns) };
+      if (timeToMinutes(truncated.end) > timeToMinutes(truncated.start)) out.push(truncated);
+      return;
+    }
+
+    // Overlap on old's left side -> truncate old start to new end
+    if (ns <= os && ne > os && ne < oe) {
+      const truncated = { ...old, start: formatMinutesToHHMM(ne) };
+      if (timeToMinutes(truncated.end) > timeToMinutes(truncated.start)) out.push(truncated);
+      return;
+    }
+  });
+
+  const newIntv = { ...interval };
+  if (!newIntv.id) newIntv.id = makeIntervalId();
+  out.push(newIntv);
+
+  out.sort((a, b) => {
+    const as = timeToMinutes(a.start);
+    const bs = timeToMinutes(b.start);
+    if (as !== bs) return as - bs;
+    return timeToMinutes(a.end) - timeToMinutes(b.end);
+  });
+
+  day.intervals = out;
+}
+
+    // Find template by id
+    function getTemplate(templateId) {
+      return state.templates.find(t => t.id === templateId) || state.templates[0];
+    }
+
+    // Convert HH:MM to minutes since midnight
+    function timeToMinutes(tm) {
+      if (tm === null || tm === undefined) return NaN;
+
+      if (typeof tm === 'number' && Number.isFinite(tm)) {
+        // If it looks like HHMM treat it as HHMM; otherwise treat it as minutes.
+        if (tm >= 0 && tm <= 2400 && (tm % 100) < 60) {
+          const h = Math.floor(tm / 100);
+          const m = tm % 100;
+          return h * 60 + m;
+        }
+        return tm;
+      }
+
+      const s = String(tm).trim();
+      if (!s) return NaN;
+      if (s === '24:00' || s === '2400') return 1440;
+
+      if (s.includes(':')) {
+        const [h, m] = s.split(':').map(Number);
+        if (!Number.isFinite(h) || !Number.isFinite(m)) return NaN;
+        return h * 60 + m;
+      }
+
+      if (/^\d{1,4}$/.test(s)) {
+        const v = Number(s);
+        if (!Number.isFinite(v)) return NaN;
+        if (v >= 0 && v <= 2400 && (v % 100) < 60) {
+          const h = Math.floor(v / 100);
+          const m = v % 100;
+          return h * 60 + m;
+        }
+        return v;
+      }
+
+      return NaN;
+    }
+
+// Format minutes to HH:MM (keeps 24:00).
+function formatMinutesToHHMM(mins) {
+  if (!Number.isFinite(mins)) return null;
+  if (mins === 1440) return '24:00';
+  const v = ((mins % 1440) + 1440) % 1440;
+  const h = Math.floor(v / 60);
+  const m = v % 60;
+  return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
+}
+
+// Normalize imported time values to "HH:MM" (keeps "24:00").
+function normalizeTimeToHHMM(tm) {
+  const mins = timeToMinutes(tm);
+  if (!Number.isFinite(mins)) return null;
+  if (mins < 0) return null;
+  if (mins > 1440) return formatMinutesToHHMM(mins % 1440);
+  return formatMinutesToHHMM(mins);
+}
+
+// Split a segment that crosses midnight into two segments.
+function splitOvernightSegment(seg) {
+  const sMin = timeToMinutes(seg.start);
+  const eMin = timeToMinutes(seg.end);
+  if (!Number.isFinite(sMin) || !Number.isFinite(eMin)) return [];
+  if (eMin > sMin) return [{ ...seg, start: formatMinutesToHHMM(sMin), end: formatMinutesToHHMM(eMin) }];
+  if (eMin === sMin) return [];
+  return [
+    { ...seg, start: formatMinutesToHHMM(sMin), end: '24:00' },
+    { ...seg, start: '00:00', end: formatMinutesToHHMM(eMin) },
+  ];
+}
+
+// Canonical access to template planned blocks: accepts template.entries (new) or template.slots (old).
+function getTemplateBlocks(template) {
+  if (!template) return [];
+  const raw = Array.isArray(template.entries)
+    ? template.entries
+    : (Array.isArray(template.slots) ? template.slots : []);
+
+  const normalized = raw
+    .map(e => ({
+      start: normalizeTimeToHHMM(e.start),
+      end: normalizeTimeToHHMM(e.end),
+      categoryId: (e.categoryId && String(e.categoryId).trim()) ? String(e.categoryId).trim() : null,
+      description: e.description ? String(e.description) : ''
+    }))
+    .filter(e => e.start && e.end);
+
+  const out = [];
+  normalized.forEach(e => out.push(...splitOvernightSegment(e)));
+  out.sort((a, b) => timeToMinutes(a.start) - timeToMinutes(b.start));
+  return out;
+}
+
+    // Format minutes to h:mm string
+    function minutesToHM(mins) {
+      const sign = mins < 0 ? '-' : '';
+      const v = Math.abs(mins);
+      const h = Math.floor(v / 60);
+      const m = v % 60;
+      return `${sign}${h}:${String(m).padStart(2, '0')}`;
+    }
+
+
+    function pad2(n){ return String(n).padStart(2,'0'); }
+
+    function hourOptions(selected, maxH=23){
+      let out = `<option value="">—</option>`;
+      for (let h=0; h<=maxH; h++){
+        const v = String(h);
+        out += `<option value="${v}" ${String(selected)===v ? 'selected':''}>${pad2(h)}</option>`;
+      }
+      return out;
+    }
+
+    function minute5Options(selected){
+      let out = `<option value="">—</option>`;
+      for (let m=0; m<=55; m+=5){
+        const v = String(m);
+        out += `<option value="${v}" ${String(selected)===v ? 'selected':''}>${pad2(m)}</option>`;
+      }
+      // If selected is a non-5 minute value (legacy), include it as an option
+      if (String(selected).trim() !== '' && Number.isFinite(Number(selected)) && (Number(selected) % 5 !== 0)){
+        out += `<option value="${selected}" selected>${pad2(Number(selected))}</option>`;
+      }
+      return out;
+    }
+
+    function parseHHMMParts(t){
+      const nt = normalizeTimeToHHMM(t);
+      if (!nt || !nt.includes(':')) return { h:'', m:'' };
+      const [h,m] = nt.split(':');
+      return { h: String(Number(h)), m: String(Number(m)) };
+    }
+
+    function buildHHMM(h, m){
+      if (String(h).trim()==='' || String(m).trim()==='') return null;
+      return `${pad2(Number(h))}:${pad2(Number(m))}`;
+    }
+
+    function goalMinutesFromHM(h, m){
+      if (String(h).trim()==='' && String(m).trim()==='') return null;
+      const hh = String(h).trim()==='' ? 0 : Number(h);
+      const mm = String(m).trim()==='' ? 0 : Number(m);
+      return (Math.max(0, Math.min(23, Math.floor(hh))) * 60) + Math.max(0, Math.min(59, Math.floor(mm)));
+    }
+
+    // Local date formatting (avoids UTC day-shift from toISOString())
+    function dateToLocalISO(dateObj) {
+      const y = dateObj.getFullYear();
+      const m = String(dateObj.getMonth() + 1).padStart(2, '0');
+      const d = String(dateObj.getDate()).padStart(2, '0');
+      return `${y}-${m}-${d}`;
+    }
+
+
+    // Parse YYYY-MM-DD as local midnight (avoids UTC day shift from new Date('YYYY-MM-DD')).
+    function parseLocalISODate(dateStr) {
+      const parts = String(dateStr || '').split('-').map(Number);
+      if (parts.length !== 3 || parts.some(n => !Number.isFinite(n))) return new Date(NaN);
+      const [y, m, d] = parts;
+      return new Date(y, m - 1, d);
+    }
+
+    
+
+    function escapeHtml(str) {
+      return String(str ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+// Parse goal input. Accepts H:MM (preferred), H (treated as hours), or minutes.
+    function parseGoalToMinutes(raw) {
+      const s = String(raw || '').trim();
+      if (!s) return null;
+      if (s.includes(':')) {
+        const [hStr, mStr] = s.split(':');
+        const h = Number(hStr);
+        const m = Number(mStr);
+        if (!Number.isFinite(h) || !Number.isFinite(m)) return null;
+        return Math.max(0, Math.round(h)) * 60 + Math.max(0, Math.min(59, Math.round(m)));
+      }
+      const v = Number(s);
+      if (!Number.isFinite(v)) return null;
+      if (v <= 24) return Math.round(v) * 60;
+      return Math.round(v);
+    }
+
+    function goalMinutesToInput(mins) {
+      if (mins == null || mins === '' || !Number.isFinite(Number(mins))) return '';
+      return minutesToHM(Number(mins));
+    }
+
+    function diffPill(mins) {
+      if (mins == null || !Number.isFinite(mins)) return '';
+      const cls = mins > 0 ? 'over' : 'under';
+      const sign = mins > 0 ? '+' : '';
+      return `<span class="diff-pill ${cls}">${sign}${minutesToHM(mins)}</span>`;
+    }
+
+
+
+    // Sum minutes for intervals by category
+    function computeActualByCategory(day) {
+      const sums = {};
+      day.intervals.forEach(intv => {
+        const dur = timeToMinutes(intv.end) - timeToMinutes(intv.start);
+        if (!sums[intv.categoryId]) sums[intv.categoryId] = 0;
+        sums[intv.categoryId] += Math.max(dur, 0);
+      });
+      return sums;
+    }
+
+    // Compute planned minutes by category for a template
+    function computePlannedByCategory(template) {
+      const sums = {};
+      const blocks = getTemplateBlocks(template);
+      blocks.forEach(b => {
+        if (!b.categoryId) return;
+        const s = timeToMinutes(b.start);
+        const e = timeToMinutes(b.end);
+        if (!Number.isFinite(s) || !Number.isFinite(e)) return;
+        const dur = Math.max(e - s, 0);
+        if (!sums[b.categoryId]) sums[b.categoryId] = 0;
+        sums[b.categoryId] += dur;
+      });
+      return sums;
+    }
+
+
+    function computeGoalSumMinutes() {
+      return state.categories.reduce((acc, c) => acc + (Number.isFinite(c.dailyGoalMinutes) ? c.dailyGoalMinutes : 0), 0);
+    }
+
+    function computePlannedGoalCategoryMinutes(template) {
+      const planned = computePlannedByCategory(template);
+      return state.categories.reduce((acc, c) => {
+        if (c.dailyGoalMinutes == null) return acc;
+        return acc + (planned[c.id] || 0);
+      }, 0);
+    }
+
+
+    // Category helpers
+    function getCategory(catId) {
+      return state.categories.find(c => c.id === catId) || null;
+    }
+
+    function addCategory(name) {
+      const id = name.trim().toLowerCase().replace(/\s+/g, '-');
+      if (!name.trim()) return null;
+      if (state.categories.some(c => c.id === id)) {
+        return state.categories.find(c => c.id === id);
+      }
+      const cat = { id, name: name.trim(), dailyGoalMinutes: null, starred: false };
+      state.categories.push(cat);
+      return cat;
+    }
+
+    // ========= Rendering functions =========
+
+    const viewContainer = document.getElementById('view-container');
+    const dbStatusLabel = document.getElementById('status-db-location-label');
+    const dayTypeStatusLabel = document.getElementById('status-day-type-label');
+
+    function setStatusLabels() {
+      dbStatusLabel.textContent = `Data file: ${state.dataLocation}`;
+      const day = state.days[state.selectedDate];
+      if (!day) {
+        dayTypeStatusLabel.textContent = 'No day selected';
+      } else {
+        const tmpl = getTemplate(day.templateId);
+        dayTypeStatusLabel.textContent = `Day: ${state.selectedDate} • Template: ${tmpl.name}`;
+      }
+    }
+
+    function render() {
+      switch (state.selectedView) {
+        case 'day-entry':
+          renderDayEntryView();
+          break;
+        case 'multi-day':
+          renderMultiDayView();
+          break;
+        case 'templates':
+          renderTemplatesView();
+          break;
+        case 'categories':
+          renderCategoriesView();
+          break;
+        case 'settings':
+          renderSettingsView();
+          break;
+        default:
+          renderDayEntryView();
+      }
+      setStatusLabels();
+    }
+
+    function renderDayEntryView() {
+      const day = ensureDay(state.selectedDate);
+      const template = getTemplate(day.templateId);
+      const planned = computePlannedByCategory(template);
+      const actual = getAdjustedDayStats(state.selectedDate);
+
+      const categories = state.categories;
+
+      const dayNote = day.note || '';
+      
+      // Find the last interval's end time to default next start
+      const lastEndTime = day.intervals.length > 0 
+        ? day.intervals[day.intervals.length - 1].end 
+        : '06:00';
+
+      const html = `
+        <div class="card">            <div class="card-header">
+            <div>
+              <h2>Day Entry & View</h2>
+              <div class="card-subtitle">
+                Select a date, choose a template, record your real time, and compare against plan and goals.
+              </div>
+            </div>
+            <div style="display:grid; grid-template-columns: auto 1fr auto; gap:12px; align-items:flex-end; max-width:400px;">
+              <div style="display:flex; flex-direction:column; gap:4px;">
+                <label class="form-label" style="margin:0;">Date</label>
+                <div style="display:flex; gap:8px; align-items:center;">
+                  <input type="date" id="day-date-input" value="${state.selectedDate}" class="form-control" />
+                  <div style="display:flex; flex-direction:column; gap:6px;">
+                    <button class="btn sm secondary" id="btn-day-next" title="Next day">▲</button>
+                    <button class="btn sm secondary" id="btn-day-prev" title="Previous day">▼</button>
+                  </div>
+                </div>
+              </div>
+              <div style="display:flex; flex-direction:column; gap:4px;">
+                <label class="form-label" style="margin:0;">Template</label>
+                <select id="day-template-select" class="form-control">
+                  ${state.templates.map(t => `
+                    <option value="${t.id}" ${t.id === day.templateId ? 'selected' : ''}>${t.name}</option>
+                  `).join('')}
+                </select>
+              </div>
+              <div style="display:flex; flex-direction:column; justify-content:flex-end; padding-bottom:1px;">
+                <button class="btn sm secondary text" id="btn-delete-day" style="color:var(--color-red-500); border-color:var(--color-red-500); white-space:nowrap;" title="Delete all data for this day">Delete Day</button>
+              </div>
+            </div>
+          </div>
+
+                    <div class="day-entry-top">
+<div class="card-section">
+            <h3 style="font-size:14px;">New Time Entry</h3>
+
+            <div class="entry-sticky">
+              <div class="entry-row">
+                <div class="entry-cell">
+                  <span class="entry-label">Start</span>
+                  <button class="btn secondary entry-time-btn" id="btn-pick-start-time" style="text-align:center;">
+                    <span id="display-start-time">--:--</span>
+                  </button>
+                </div>
+
+                <div class="entry-cell">
+                  <span class="entry-label">End</span>
+                  <button class="btn secondary entry-time-btn" id="btn-pick-end-time" style="text-align:center;">
+                    <span id="display-end-time">--:--</span>
+                  </button>
+                </div>
+
+                <div class="entry-cell">
+                  <span class="entry-label">Cat</span>
+                  <select id="entry-category" class="form-control entry-category">
+                    <option value="">Select…</option>
+                    ${categories.map(c => `
+                      <option value="${c.id}">${c.name}</option>
+                    `).join('')}
+                  </select>
+                </div>
+
+                <button class="btn sm secondary entry-add-cat" id="btn-add-category-inline" title="Add category">+</button>
+
+                <div class="entry-cell" style="min-width:0;">
+                  <span class="entry-label">Note</span>
+                  <input id="entry-note" class="form-control entry-note" placeholder="Description (optional)" />
+                </div>
+
+                <button class="btn sm secondary" id="btn-cancel-edit" style="display:none;">Cancel</button>
+
+                <button class="btn inactive-add entry-add-btn" id="btn-add-interval">Add Entry</button>
+              </div>
+
+              <div id="entry-error" class="error-text" style="display:none; margin-top:6px;"></div>
+            </div>
+          </div>          </div>
+
+          <div class="day-entry-scroll">
+
+
+          <div class="card-section">
+            <h3 style="font-size:14px;">Aligned Time View (Template vs Real Time)</h3>
+            <div class="table-wrapper" style="overflow:auto; margin-top:8px;">
+              <table style="width:100%; border-collapse:collapse;">
+                <thead>
+                  <tr style="background: rgba(var(--color-brown-600-rgb), 0.04);">
+                    <th colspan="3" style="padding:4px 6px; text-align:left; font-weight:600; color:var(--color-text-secondary); border-bottom:1px solid rgba(var(--color-brown-600-rgb), 0.12);">Template (Planned)</th>
+                    <th colspan="3" style="padding:4px 6px; text-align:left; font-weight:600; color:var(--color-text-secondary); border-bottom:1px solid rgba(var(--color-brown-600-rgb), 0.12); border-left:1px solid rgba(var(--color-brown-600-rgb), 0.12);">Real Time (Recorded)</th>
+                  </tr>
+                  <tr style="background: rgba(var(--color-brown-600-rgb), 0.04);">
+                    <th style="padding:4px 6px; text-align:left; font-weight:500; color:var(--color-text-secondary); width:80px; border-bottom:1px solid rgba(var(--color-brown-600-rgb), 0.12);">Time Period</th>
+                    <th style="padding:4px 6px; text-align:left; font-weight:500; color:var(--color-text-secondary); width:120px; border-bottom:1px solid rgba(var(--color-brown-600-rgb), 0.12); border-left:1px solid rgba(var(--color-brown-600-rgb), 0.12);">Category</th>
+                    <th style="padding:4px 6px; text-align:left; font-weight:500; color:var(--color-text-secondary); width:240px; border-bottom:1px solid rgba(var(--color-brown-600-rgb), 0.12); border-left:1px solid rgba(var(--color-brown-600-rgb), 0.12);">Description</th>
+                    <th style="padding:4px 6px; text-align:left; font-weight:500; color:var(--color-text-secondary); width:80px; border-bottom:1px solid rgba(var(--color-brown-600-rgb), 0.12); border-left:1px solid rgba(var(--color-brown-600-rgb), 0.12);">Time Period</th>
+                    <th style="padding:4px 6px; text-align:left; font-weight:500; color:var(--color-text-secondary); width:120px; border-bottom:1px solid rgba(var(--color-brown-600-rgb), 0.12); border-left:1px solid rgba(var(--color-brown-600-rgb), 0.12);">Category</th>
+                    <th style="padding:4px 6px; text-align:left; font-weight:500; color:var(--color-text-secondary); width:240px; border-bottom:1px solid rgba(var(--color-brown-600-rgb), 0.12); border-left:1px solid rgba(var(--color-brown-600-rgb), 0.12);">Description</th>
+                  </tr>
+                </thead>
+                <tbody id="aligned-time-tbody">
+                  <!-- Rows injected by JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card-section">
+            <h3 style="font-size:14px;">Daily Summary & Goals</h3>
+            <div class="summary-grid" id="daily-summary-grid">
+              ${categories.map(cat => {
+                const goal = cat.dailyGoalMinutes;
+                const planMin = planned[cat.id] || 0;
+                const actMin = actual[cat.id] || 0;
+
+                const goalDiff = goal != null ? actMin - goal : null;
+                const planDiff = actMin - planMin;
+
+                const goalDiffCls = goalDiff == null ? '' : (goalDiff >= 0 ? 'diff-pill diff-pos' : 'diff-pill diff-neg');
+                const planDiffCls = planDiff >= 0 ? 'diff-pill diff-pos' : 'diff-pill diff-neg';
+
+                const taggedCls = cat.starred ? 'tagged-accent' : '';
+
+                return `
+                  <div class="summary-item ${taggedCls}">
+                    <div class="summary-item-title">${cat.name}${cat.starred ? ' ✓' : ''}</div>
+                    <div class="summary-item-value">${minutesToHM(actMin)}</div>
+                    <div class="summary-item-meta">
+                      ${goal != null ? `Goal ${minutesToHM(goal)} (<span class="${goalDiffCls}">${goalDiff >= 0 ? '+' : ''}${minutesToHM(goalDiff)}</span>)` : 'No daily goal set.'}<br/>
+                      Template ${minutesToHM(planMin)} (<span class="${planDiffCls}">${planDiff >= 0 ? '+' : ''}${minutesToHM(planDiff)}</span>)
+                    </div>
+                  </div>
+                `;
+              }).join('')}
+              <div class="summary-item" style="background: rgba(var(--color-teal-500-rgb), 0.1); border: 2px solid var(--color-primary);">
+                <div class="summary-item-title">Total Time Accounted</div>
+                <div class="summary-item-value">${minutesToHM(Object.values(actual).reduce((a, b) => a + (b || 0), 0))}</div>
+                <div class="summary-item-meta">All recorded intervals combined</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-section notes-area">
+            <h3 style="font-size:14px;">Day Notes</h3>
+            <textarea id="day-note-input" class="form-control" placeholder="Diary-style notes for this day…">${dayNote}</textarea>
+            <div class="form-hint">Notes are stored per day and visible in day view and future exports.</div>
+          </div>
+        </div>
+        </div>
+          ${isMobile ? `
+          <div class="card" style="margin-top: 20px; border: 1px dashed #0078d4; background-color: #f0f8ff;"> 
+            <div class="card-header"> 
+              <div> 
+                <h3 style="margin:0; font-size:16px;">Mobile Sync (quick)</h3>
+                <div class="card-subtitle">Link your OneDrive mobile_sync folder, refresh categories, then send intervals to PC.</div>
+              </div>
+              <button class="btn sm secondary" onclick="state.selectedView='settings'; render();">Open Settings</button>
+            </div>
+            <div class="card-section">
+              <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                <button class="btn secondary" onclick="pickMobileSyncFolder()">Select mobile_sync folder…</button>
+                <button class="btn secondary" onclick="refreshMobileReference()">Refresh categories</button>
+                <button class="btn" onclick="downloadMobileBuffer()">Send to PC</button>
+                <button class="btn secondary" style="border-color: #d32f2f; color: #d32f2f;" onclick="wipeMobileData()">Clear Data</button>
+              </div>
+            </div>
+          </div>
+          ` : ``}
+      `;
+
+      viewContainer.innerHTML = html;
+
+      // Store form state for time entry
+      let entryStartTime = null;
+      let entryEndTime = null;
+      let entryDirty = false;
+
+      function setAddEntryButtonState(isDirty) {
+        const btn = document.getElementById('btn-add-interval');
+        if (!btn) return;
+        entryDirty = !!isDirty;
+        btn.classList.toggle('inactive-add', !entryDirty);
+      }
+
+
+      // Refresh Daily Summary (totals/goals) without re-rendering the whole view.
+      function refreshDailySummary() {
+        const grid = document.getElementById('daily-summary-grid');
+        if (!grid) return;
+
+        const plannedNow = computePlannedByCategory(template);
+        const actualNow = getAdjustedDayStats(state.selectedDate);
+
+        const items = categories.map(cat => {
+          const goal = cat.dailyGoalMinutes;
+          const planMin = plannedNow[cat.id] || 0;
+          const actMin = actualNow[cat.id] || 0;
+          const goalDiff = (goal !== null && goal !== undefined) ? (actMin - goal) : null;
+          const planDiff = actMin - planMin;
+
+          const meta = (goal !== null && goal !== undefined)
+            ? `Template: ${minutesToHM(planMin)} (${planDiff >= 0 ? '+' : ''}${minutesToHM(planDiff)})`
+            : `No daily goal set.<br/>Template: ${minutesToHM(planMin)} (${planDiff >= 0 ? '+' : ''}${minutesToHM(planDiff)})`;
+
+          return `
+            <div class="summary-item ${cat.starred ? 'starred' : ''} ${(goal !== null && goal !== undefined) ? (actMin >= goal ? 'goal-ok' : 'goal-bad') : ''}">
+              <div class="summary-item-title"><strong>${cat.name}</strong></div>
+              <div class="summary-item-value">${minutesToHM(actMin)}</div>
+              <div class="summary-item-meta">${(goal !== null && goal !== undefined) ? `<span class="goal-compare ${actMin >= goal ? 'ok' : 'bad'}">Actual ${minutesToHM(actMin)} / Goal ${minutesToHM(goal)}</span><br/>Template: ${minutesToHM(planMin)} (${planDiff >= 0 ? '\+' : ''}${minutesToHM(planDiff)})` : meta}</div>
+            </div>
+          `;
+        }).join('');
+
+        const total = Object.values(actualNow).reduce((a, b) => a + b, 0);
+
+        grid.innerHTML = items + `
+          <div class="summary-item" style="background: rgba(var(--color-teal-500-rgb), 0.1); border: 2px solid var(--color-primary);">
+            <div class="summary-item-title">Total Time Accounted</div>
+            <div class="summary-item-value">${minutesToHM(total)}</div>
+            <div class="summary-item-meta">All recorded intervals combined</div>
+          </div>
+        `;
+      }
+
+      setAddEntryButtonState(false);
+
+      // Time picker modal function
+      function openTimePickerModal(currentTime, title, isStartTime, callback) {
+        const overlay = document.createElement('div');
+        overlay.className = 'modal-overlay';
+        
+        // Parse current time or default
+        let selH = 6, selM = 0;
+        if (currentTime) {
+          const [h, m] = currentTime.split(':').map(Number);
+          selH = h;
+          selM = m;
+        } else if (isStartTime && day.intervals.length > 0) {
+          // Use last interval's end time as default for new start
+          const [h, m] = day.intervals[day.intervals.length - 1].end.split(':').map(Number);
+          selH = h;
+          selM = m;
+        }
+        
+        // For end time picker: if no time yet, default to start time + 5 min
+        if (!currentTime && !isStartTime && entryStartTime) {
+          const startMin = timeToMinutes(entryStartTime) + 5;
+          selH = Math.floor(startMin / 60) % 24;
+          selM = startMin % 60;
+        }
+
+        overlay.innerHTML = `
+          <div class="modal-dialog">
+            <div class="modal-header">${title}</div>
+            <div class="modal-body time-picker-modal">
+              <div class="time-picker-scroll-row">
+                <div>
+                  <div class="time-picker-label">Hour</div>
+                  <div class="time-picker-scroll-container" id="hour-scroll">
+                    ${Array.from({length: (isStartTime ? 24 : 25)}, (_, i) => `
+                      <div class="time-picker-scroll-item ${i === selH ? 'selected' : ''}" data-value="${i}">
+                        ${String(i).padStart(2, '0')}
+                      </div>
+                    `).join('')}
+                  </div>
+                </div>
+                <div style="text-align: center; font-weight: 600; font-size: 18px;">:</div>
+                <div>
+                  <div class="time-picker-label">Minute</div>
+                  <div class="time-picker-scroll-container" id="minute-scroll">
+                    ${[0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55].map(m => `
+                      <div class="time-picker-scroll-item ${m === selM ? 'selected' : ''}" data-value="${m}">
+                        ${String(m).padStart(2, '0')}
+                      </div>
+                    `).join('')}
+                  </div>
+                </div>
+              </div>
+              <div style="text-align: center; font-size: 24px; font-weight: 600; font-family: monospace; padding: var(--space-8) 0;">
+                <span id="time-display">${String(selH).padStart(2, '0')}:${String(selM).padStart(2, '0')}</span>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="btn secondary" id="modal-cancel">Cancel</button>
+              <button class="btn" id="modal-confirm">Confirm</button>
+            </div>
+          </div>
+        `;
+        document.body.appendChild(overlay);
+
+        let selectedH = selH;
+        let selectedM = selM;
+
+        const hourScroll = overlay.querySelector('#hour-scroll');
+        const minuteScroll = overlay.querySelector('#minute-scroll');
+        const timeDisplay = overlay.querySelector('#time-display');
+
+        // Handle hour selection
+        hourScroll.querySelectorAll('.time-picker-scroll-item').forEach(item => {
+          item.addEventListener('click', () => {
+            hourScroll.querySelectorAll('.time-picker-scroll-item').forEach(i => i.classList.remove('selected'));
+            item.classList.add('selected');
+            selectedH = Number(item.dataset.value);
+            timeDisplay.textContent = `${String(selectedH).padStart(2, '0')}:${String(selectedM).padStart(2, '0')}`;
+            item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          });
+          if (Number(item.dataset.value) === selH) {
+            item.scrollIntoView({ block: 'nearest' });
+          }
+        });
+
+        // Handle minute selection
+        minuteScroll.querySelectorAll('.time-picker-scroll-item').forEach(item => {
+          item.addEventListener('click', () => {
+            minuteScroll.querySelectorAll('.time-picker-scroll-item').forEach(i => i.classList.remove('selected'));
+            item.classList.add('selected');
+            selectedM = Number(item.dataset.value);
+            timeDisplay.textContent = `${String(selectedH).padStart(2, '0')}:${String(selectedM).padStart(2, '0')}`;
+            item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          });
+          if (Number(item.dataset.value) === selM) {
+            item.scrollIntoView({ block: 'nearest' });
+          }
+        });
+
+        overlay.querySelector('#modal-confirm').addEventListener('click', () => {
+          callback(`${String(selectedH).padStart(2, '0')}:${String(selectedM).padStart(2, '0')}`);
+          overlay.remove();
+        });
+
+        overlay.querySelector('#modal-cancel').addEventListener('click', () => {
+          overlay.remove();
+        });
+
+        overlay.addEventListener('click', (e) => {
+          if (e.target === overlay) overlay.remove();
+        });
+      }
+
+      // Wiring events
+      document.getElementById('day-date-input').addEventListener('change', e => {
+        state.selectedDate = e.target.value || state.selectedDate;
+        render();
+      });
+
+      function shiftSelectedDate(deltaDays) {
+        const d = parseLocalISODate(state.selectedDate);
+        d.setDate(d.getDate() + deltaDays);
+        state.selectedDate = dateToLocalISO(d);
+        render();
+      }
+
+      document.getElementById('btn-day-next')?.addEventListener('click', () => shiftSelectedDate(+1));
+      document.getElementById('btn-day-prev')?.addEventListener('click', () => shiftSelectedDate(-1));
+
+
+      
+      document.getElementById('btn-delete-day')?.addEventListener('click', () => {
+        if (confirm('WARNING: Are you sure you want to delete ALL data for the current day (' + state.selectedDate + ')? This cannot be undone.')) {
+            delete state.days[state.selectedDate];
+            // Also need to clear the specific day object from memory if it persists elsewhere? 
+            // state.days is the source of truth.
+            render();
+        }
+      });
+    
+document.getElementById('day-template-select').addEventListener('change', e => {
+        const tmplId = e.target.value;
+        const day = ensureDay(state.selectedDate);
+        day.templateId = tmplId;
+        render();
+      });
+
+      document.getElementById('btn-pick-start-time').addEventListener('click', () => {
+        openTimePickerModal(entryStartTime, 'Select Start Time', true, (time) => {
+          entryStartTime = time;
+          document.getElementById('display-start-time').textContent = time;
+        setAddEntryButtonState(true);
+          // Auto-set end time to 5 minutes after start if not already set
+          if (!entryEndTime) {
+            const endMin = timeToMinutes(time) + 5;
+            const endH = Math.floor(endMin / 60) % 24;
+            const endM = endMin % 60;
+            entryEndTime = `${String(endH).padStart(2, '0')}:${String(endM).padStart(2, '0')}`;
+            document.getElementById('display-end-time').textContent = entryEndTime;
+          }
+        });
+      });
+
+      document.getElementById('btn-pick-end-time').addEventListener('click', () => {
+        openTimePickerModal(entryEndTime, 'Select End Time', false, (time) => {
+          entryEndTime = time;
+          document.getElementById('display-end-time').textContent = time;
+        setAddEntryButtonState(true);
+        });
+      });
+
+      document.getElementById('btn-add-category-inline').addEventListener('click', () => {
+        openAddCategoryModal((newName, goalMinutes, starred) => {
+          const cat = addCategory(newName);
+          if (cat) {
+            cat.dailyGoalMinutes = (goalMinutes == null ? null : goalMinutes);
+            cat.starred = !!starred;
+          }
+          // Preserve complete form state before any DOM changes
+          const formState = {
+            startTime: entryStartTime,
+            endTime: entryEndTime,
+            note: document.getElementById('entry-note')?.value || '',
+            category: document.getElementById('entry-category')?.value || '',
+            errorMsg: document.getElementById('entry-error')?.textContent || '',
+            errorVisible: document.getElementById('entry-error')?.style.display || 'none'
+          };
+          
+          render();
+          
+          // Restore form state after render
+          entryStartTime = formState.startTime;
+          entryEndTime = formState.endTime;
+          if (document.getElementById('display-start-time')) {
+            document.getElementById('display-start-time').textContent = formState.startTime || '--:--';
+          }
+          if (document.getElementById('display-end-time')) {
+            document.getElementById('display-end-time').textContent = formState.endTime || '--:--';
+          }
+          if (document.getElementById('entry-note')) {
+            document.getElementById('entry-note').value = formState.note;
+          }
+          const select = document.getElementById('entry-category');
+          if (select) {
+            select.value = formState.category || cat.id;
+          }
+          // Restore error state
+          if (document.getElementById('entry-error')) {
+            document.getElementById('entry-error').textContent = formState.errorMsg;
+            document.getElementById('entry-error').style.display = formState.errorVisible;
+          }
+          // Re-attach event listeners for newly rendered buttons
+          reattachDayEntryListeners();
+        });
+      });
+
+      
+
+      // (1) Enter in description triggers Add Entry when the button is active (teal).
+      const entryNoteEl = document.getElementById('entry-note');
+      const addBtnEl = document.getElementById('btn-add-interval');
+      if (entryNoteEl && addBtnEl) {
+        entryNoteEl.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') {
+            const isActive = !addBtnEl.classList.contains('inactive-add');
+            if (isActive) {
+              e.preventDefault();
+              addBtnEl.click();
+            }
+          }
+        });
+      }
+
+      // Entry mode (add vs edit)
+      let editingIntervalId = null;
+
+      function setEntryMode(mode, intervalId = null) {
+        const addBtn = document.getElementById('btn-add-interval');
+        const cancelBtn = document.getElementById('btn-cancel-edit');
+        if (!addBtn || !cancelBtn) return;
+        if (mode === 'edit') {
+          editingIntervalId = intervalId;
+          addBtn.textContent = 'Save Edit';
+          cancelBtn.style.display = 'inline-flex';
+        } else {
+          editingIntervalId = null;
+          addBtn.textContent = 'Add Entry';
+          cancelBtn.style.display = 'none';
+        }
+      }
+
+      function clearEntryForm({ keepStart = false } = {}) {
+        const err = document.getElementById('entry-error');
+        if (err) err.style.display = 'none';
+
+        if (!keepStart) {
+          entryStartTime = null;
+          document.getElementById('display-start-time').textContent = '--:--';
+        }
+
+        entryEndTime = null;
+        document.getElementById('display-end-time').textContent = '--:--';
+
+        document.getElementById('entry-note').value = '';
+        document.getElementById('entry-category').value = '';
+
+        setAddEntryButtonState(false);
+        setEntryMode('add');
+      }
+
+      // Mark entry dirty when category/note changes
+      document.getElementById('entry-category')?.addEventListener('change', () => setAddEntryButtonState(true));
+      document.getElementById('entry-note')?.addEventListener('input', () => setAddEntryButtonState(true));
+
+      document.getElementById('btn-cancel-edit')?.addEventListener('click', () => {
+        setEntryMode('add');
+        clearEntryForm();
+      });
+
+      function loadIntervalIntoEntryForm(intv) {
+        if (!intv) return;
+        ensureIntervalIds(day);
+        entryStartTime = normalizeTimeToHHMM(intv.start);
+        entryEndTime = normalizeTimeToHHMM(intv.end);
+        document.getElementById('display-start-time').textContent = entryStartTime || '--:--';
+        document.getElementById('display-end-time').textContent = entryEndTime || '--:--';
+        document.getElementById('entry-category').value = intv.categoryId || '';
+        document.getElementById('entry-note').value = intv.note || '';
+        setEntryMode('edit', intv.id);
+        setAddEntryButtonState(true);
+      }
+
+      // Click-to-edit on the recorded (actual) side of the aligned time table
+      document.getElementById('aligned-time-tbody')?.addEventListener('click', (e) => {
+        const cell = e.target.closest('.actual-cell');
+        if (!cell) return;
+        const intervalId = cell.getAttribute('data-interval-id');
+        if (!intervalId) return;
+        const intv = (day.intervals || []).find(x => String(x.id) === String(intervalId));
+        if (!intv) return;
+        loadIntervalIntoEntryForm(intv);
+      });
+
+      document.getElementById('btn-add-interval').addEventListener('click', () => {
+        const catId = document.getElementById('entry-category').value;
+        const note = document.getElementById('entry-note').value.trim();
+        const err = document.getElementById('entry-error');
+
+        if (!entryStartTime || !entryEndTime) {
+          err.textContent = 'Start time and end time are required.';
+          err.style.display = 'block';
+          return;
+        }
+        if (!catId) {
+          err.textContent = 'Please select a category.';
+          err.style.display = 'block';
+          return;
+        }
+
+        const s = normalizeTimeToHHMM(entryStartTime);
+        const e = normalizeTimeToHHMM(entryEndTime);
+        const sMin = timeToMinutes(s);
+        const eMin = timeToMinutes(e);
+        if (!Number.isFinite(sMin) || !Number.isFinite(eMin) || eMin <= sMin) {
+          err.textContent = 'End time must be after start time.';
+          err.style.display = 'block';
+          return;
+        }
+
+        const day = ensureDay(state.selectedDate);
+        ensureIntervalIds(day);
+
+        const newInterval = {
+          id: editingIntervalId || makeIntervalId(),
+          start: s,
+          end: e,
+          categoryId: catId,
+          note
+        };
+
+        const overlaps = findOverlappingIntervals(day, newInterval.start, newInterval.end, editingIntervalId);
+        if (overlaps.length > 0) {
+          const preview = overlaps.slice(0, 6).map(o => `${o.start}-${o.end}`).join(', ');
+          const msg = `This entry overlaps ${overlaps.length} existing block(s): ${preview}${overlaps.length > 6 ? '…' : ''}.
+
+Overwrite the overlapping time? (Existing blocks will be trimmed or split to fit.)`;
+          if (!confirm(msg)) return;
+        }
+
+        err.style.display = 'none';
+        setAddEntryButtonState(false);
+
+        upsertIntervalWithOverwrite(day, newInterval, editingIntervalId);
+
+        // After save, set next start to the saved end time
+        entryStartTime = newInterval.end;
+        const nextEndMin = timeToMinutes(entryStartTime) + 5;
+        entryEndTime = formatMinutesToHHMM(Math.min(1440, nextEndMin));
+
+        document.getElementById('display-start-time').textContent = entryStartTime;
+        document.getElementById('display-end-time').textContent = entryEndTime;
+        document.getElementById('entry-note').value = '';
+        document.getElementById('entry-category').value = '';
+
+        setEntryMode('add');
+
+        buildAlignedTimeGrid();
+        refreshDailySummary();
+      });
+
+      const tbody = viewContainer.querySelector('tbody');
+      // Delegate edit/delete buttons - handled by helper function
+      reattachDayEntryListeners();
+
+      document.getElementById('day-note-input').addEventListener('change', e => {
+        const day = ensureDay(state.selectedDate);
+        day.note = e.target.value;
+      });
+
+            
+      function minutesToTime(mins) {
+  if (!Number.isFinite(mins)) return '--:--';
+  if (mins === 1440) return '24:00';
+  const v = ((mins % 1440) + 1440) % 1440;
+  const h = Math.floor(v / 60);
+  const m = v % 60;
+  return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
+}
+
+// Build aligned time grid with rowspan merging
+      
+function buildAlignedTimeGrid() {
+  const templateBlocks = getTemplateBlocks(template);
+
+  const actualBlocks = [];
+  (day.intervals || []).forEach(intv => {
+    const seg = {
+      start: normalizeTimeToHHMM(intv.start),
+      end: normalizeTimeToHHMM(intv.end),
+      categoryId: (intv.categoryId && String(intv.categoryId).trim()) ? String(intv.categoryId).trim() : null,
+      note: intv.note ? String(intv.note) : '',
+      sourceIntervalId: intv.id || null
+    };
+    if (!seg.start || !seg.end) return;
+    splitOvernightSegment(seg).forEach(s => actualBlocks.push(s));
+  });
+
+  const timePoints = new Set();
+  timePoints.add(0);
+  timePoints.add(1440);
+
+  templateBlocks.forEach(b => {
+    timePoints.add(timeToMinutes(b.start));
+    timePoints.add(timeToMinutes(b.end));
+  });
+
+  actualBlocks.forEach(b => {
+    timePoints.add(timeToMinutes(b.start));
+    timePoints.add(timeToMinutes(b.end));
+  });
+
+  const sortedMinutes = Array.from(timePoints).filter(Number.isFinite).sort((a, b) => a - b);
+
+  const tbody = document.getElementById('aligned-time-tbody');
+  if (!tbody) return;
+
+  if (sortedMinutes.length < 2) {
+    tbody.innerHTML = `<tr><td colspan="6" style="padding:8px; text-align:center; color:var(--color-text-secondary);">No time data yet. Add entries to see alignment.</td></tr>`;
+    return;
+  }
+
+  const rowData = [];
+  for (let i = 0; i < sortedMinutes.length - 1; i++) {
+    const startMin = sortedMinutes[i];
+    const endMin = sortedMinutes[i + 1];
+    if (endMin <= startMin) continue;
+
+    const startTime = minutesToTime(startMin);
+    const endTime = minutesToTime(endMin);
+
+    const templateOverlap = templateBlocks.find(b => {
+      const bs = timeToMinutes(b.start);
+      const be = timeToMinutes(b.end);
+      return bs < endMin && be > startMin;
+    });
+
+    const intervalOverlap = actualBlocks.find(b => {
+      const bs = timeToMinutes(b.start);
+      const be = timeToMinutes(b.end);
+      return bs < endMin && be > startMin;
+    });
+
+    const tmplPeriod = `${startTime}-${endTime}`;
+    let tmplCategory = '';
+    let tmplDesc = '';
+    if (templateOverlap) {
+      const cat = getCategory(templateOverlap.categoryId);
+      tmplCategory = cat ? cat.name : 'None';
+      tmplDesc = templateOverlap.description ? templateOverlap.description : '';
+    }
+
+    const actualPeriod = `${startTime}-${endTime}`;
+    let actualCategory = '';
+    let actualDesc = '';
+    if (intervalOverlap) {
+      const cat = getCategory(intervalOverlap.categoryId);
+      actualCategory = cat ? cat.name : 'Unknown';
+      actualDesc = intervalOverlap.note ? intervalOverlap.note : '';
+    }
+
+    rowData.push({ tmplPeriod, tmplCategory, tmplDesc, actualPeriod, actualCategory, actualDesc, actualIntervalId: intervalOverlap ? intervalOverlap.sourceIntervalId : null });
+  }
+
+  const mergedRows = [];
+  for (let i = 0; i < rowData.length; i++) {
+    const row = rowData[i];
+
+    // Template Category Rowspan
+    let tmplCatRowspan = 1;
+    for (let j = i + 1; j < rowData.length; j++) {
+      if (rowData[j].tmplCategory === row.tmplCategory) tmplCatRowspan++;
+      else break;
+    }
+
+    // Template Description Rowspan (Merge if Cat AND Desc match)
+    let tmplDescRowspan = 1;
+    for (let j = i + 1; j < rowData.length; j++) {
+      if (rowData[j].tmplCategory === row.tmplCategory && rowData[j].tmplDesc === row.tmplDesc) tmplDescRowspan++;
+      else break;
+    }
+
+    // Actual Category Rowspan
+    let actualCatRowspan = 1;
+    for (let j = i + 1; j < rowData.length; j++) {
+      if (rowData[j].actualCategory === row.actualCategory && rowData[j].actualIntervalId === row.actualIntervalId) actualCatRowspan++;
+      else break;
+    }
+
+    // Actual Description Rowspan
+    let actualDescRowspan = 1;
+    for (let j = i + 1; j < rowData.length; j++) {
+      if (rowData[j].actualCategory === row.actualCategory && rowData[j].actualDesc === row.actualDesc && rowData[j].actualIntervalId === row.actualIntervalId) actualDescRowspan++;
+      else break;
+    }
+
+    mergedRows.push({
+      ...row,
+      tmplCatRowspan,
+      tmplDescRowspan,
+      actualCatRowspan,
+      actualDescRowspan,
+      tmplCatMerged: i === 0 || rowData[i - 1].tmplCategory !== row.tmplCategory,
+      tmplDescMerged: i === 0 || rowData[i - 1].tmplCategory !== row.tmplCategory || rowData[i - 1].tmplDesc !== row.tmplDesc,
+      actualCatMerged: i === 0 || rowData[i - 1].actualCategory !== row.actualCategory || rowData[i - 1].actualIntervalId !== row.actualIntervalId,
+      actualDescMerged: i === 0 || rowData[i - 1].actualCategory !== row.actualCategory || rowData[i - 1].actualDesc !== row.actualDesc || rowData[i - 1].actualIntervalId !== row.actualIntervalId
+    });
+  }
+
+  let html = '';
+  for (let i = 0; i < mergedRows.length; i++) {
+    const row = mergedRows[i];
+    html += `<tr style="border-bottom:1px solid rgba(var(--color-brown-600-rgb), 0.12);">`;
+
+    // Template Columns
+    html += `<td style="padding:6px; font-size:12px; border-left:none;">${row.tmplPeriod}</td>`;
+
+    if (row.tmplCatMerged) {
+      html += `<td style="padding:6px; font-size:12px; border-left:1px solid rgba(var(--color-brown-600-rgb), 0.12);" rowspan="${row.tmplCatRowspan}">${row.tmplCategory}</td>`;
+    }
+
+    if (row.tmplDescMerged) {
+      html += `<td style="padding:6px; font-size:12px; border-left:1px solid rgba(var(--color-brown-600-rgb), 0.12);" rowspan="${row.tmplDescRowspan}">${row.tmplDesc}</td>`;
+    }
+
+    // Actual Columns
+    html += `<td style="padding:6px; font-size:12px; border-left:1px solid rgba(var(--color-brown-600-rgb), 0.12);" class="actual-cell" data-interval-id="${row.actualIntervalId || ''}">${row.actualPeriod}</td>`;
+
+    if (row.actualCatMerged) {
+      html += `<td style="padding:6px; font-size:12px; border-left:1px solid rgba(var(--color-brown-600-rgb), 0.12);" class="actual-cell" data-interval-id="${row.actualIntervalId || ''}" rowspan="${row.actualCatRowspan}">${row.actualCategory}</td>`;
+    }
+
+    if (row.actualDescMerged) {
+      html += `<td style="padding:6px; font-size:12px; border-left:1px solid rgba(var(--color-brown-600-rgb), 0.12);" class="actual-cell" data-interval-id="${row.actualIntervalId || ''}" rowspan="${row.actualDescRowspan}">${row.actualDesc}</td>`;
+    }
+
+    html += `</tr>`;
+  }
+
+  tbody.innerHTML = html;
+}
+// Helper to re-attach day entry listeners after render
+      function reattachDayEntryListeners() {
+        viewContainer.querySelectorAll('.btn-edit-interval').forEach(btn => {
+          btn.removeEventListener('click', null);
+          btn.addEventListener('click', e => {
+            const tr = e.target.closest('tr');
+            const idx = Number(tr.getAttribute('data-idx'));
+            const day = ensureDay(state.selectedDate);
+            const intv = day.intervals[idx];
+            if (!intv) return;
+            const newStart = prompt('Start time (HH:MM)', intv.start) || intv.start;
+            const newEnd = prompt('End time (HH:MM)', intv.end) || intv.end;
+            const catNames = state.categories.map(c => `${c.id} = ${c.name}`).join('\n');
+            const newCat = prompt(`Category id (keep as is if unsure):\n${catNames}`, intv.categoryId) || intv.categoryId;
+            const newNote = prompt('Description (optional)', intv.note || '') || intv.note;
+            intv.start = newStart;
+            intv.end = newEnd;
+            intv.categoryId = newCat;
+            intv.note = newNote;
+            render();
+          });
+        });
+
+        viewContainer.querySelectorAll('.btn-delete-interval').forEach(btn => {
+          btn.removeEventListener('click', null);
+          btn.addEventListener('click', e => {
+            const tr = e.target.closest('tr');
+            const idx = Number(tr.getAttribute('data-idx'));
+            const day = ensureDay(state.selectedDate);
+            if (!day.intervals[idx]) return;
+            if (!confirm('Delete this interval?')) return;
+            day.intervals.splice(idx, 1);
+            render();
+          });
+        });
+      }
+      
+      buildAlignedTimeGrid();
+    }
+
+    
+    // ==========================================
+    // CUSTOM ADJUSTED SUMS LOGIC (ADDED BY AI)
+    // ==========================================
+
+    function getAdjustedDayStats(dateStr) {
+      const day = state.days[dateStr];
+      // Start with base sums
+      const sums = computeActualByCategory(day || { intervals: [] });
+      if (!day || !day.intervals || day.intervals.length === 0) return sums;
+
+      // Helper to check if a block is sleep
+      const isSleep = (block) => block.categoryId === 'sleep';
+
+      // Helper to get previous and next date strings
+      const dObj = new Date(dateStr + 'T00:00:00'); // simplistic parsing
+      // Better to use existing helpers if available, but let's do robust manual
+      const addDays = (dStr, n) => {
+         const d = new Date(dStr + 'T12:00:00'); // Avoid timezone issues
+         d.setDate(d.getDate() + n);
+         return d.toISOString().split('T')[0];
+      };
+
+      const prevDateStr = addDays(dateStr, -1);
+      const nextDateStr = addDays(dateStr, 1);
+
+      const prevDay = state.days[prevDateStr];
+      const nextDay = state.days[nextDateStr];
+
+      // --- RULE (i): Sleep Carry-Over ---
+
+      // Case A: I am Day 1 (curr), Next is Day 2.
+      // If I end with sleep AND Next starts with sleep -> Move my last block to Next (subtract from me).
+      if (nextDay && nextDay.intervals && nextDay.intervals.length > 0) {
+          const myLast = day.intervals[day.intervals.length - 1];
+          const nextFirst = nextDay.intervals[0];
+
+          if (isSleep(myLast) && isSleep(nextFirst)) {
+              // Check if myLast ends at midnight (24:00 or 00:00)
+              // The system likely normalizes 24:00 to 00:00 next day or 24:00.
+              // Let's check minutes.
+              let endMin = timeToMinutes(myLast.end); if (myLast.end === '00:00' || myLast.end === '0:00') endMin = 1440;
+              // 1440 is 24:00.
+              if (endMin === 1440 || myLast.end === '00:00' || myLast.end === '24:00') {
+                  const dur = endMin - timeToMinutes(myLast.start);
+                  sums['sleep'] = (sums['sleep'] || 0) - dur;
+              }
+          }
+      }
+
+      // Case B: I am Day 2 (curr), Prev is Day 1.
+      // If Prev ends with sleep AND I start with sleep -> Add Prev's last block to me.
+      if (prevDay && prevDay.intervals && prevDay.intervals.length > 0) {
+          const prevLast = prevDay.intervals[prevDay.intervals.length - 1];
+          const myFirst = day.intervals[0];
+
+          if (isSleep(prevLast) && isSleep(myFirst)) {
+              const endMin = timeToMinutes(prevLast.end);
+              if (endMin === 1440 || prevLast.end === '00:00' || prevLast.end === '24:00') {
+                   const dur = endMin - timeToMinutes(prevLast.start);
+                   sums['sleep'] = (sums['sleep'] || 0) + dur;
+              }
+          }
+      }
+
+      // --- RULE (ii): Late Night Activity Shift ---
+      // "if day1's last activity at midnight is not sleep, and the day 2's first activity at midnight is not sleep"
+
+      // Case A: I am Day 1 (curr). Shift Next Day's early non-sleeps to me.
+      if (nextDay && nextDay.intervals && nextDay.intervals.length > 0) {
+          const myLast = day.intervals[day.intervals.length - 1];
+          const nextFirst = nextDay.intervals[0];
+
+          // Check boundary conditions
+          const myLastIsSleep = isSleep(myLast);
+          const nextFirstIsSleep = isSleep(nextFirst);
+
+          if (!myLastIsSleep && !nextFirstIsSleep) {
+              // Find start time of first sleep block in Next Day
+              const nextSleepBlock = nextDay.intervals.find(i => isSleep(i));
+
+              if (nextSleepBlock) {
+                  const boundaryMin = timeToMinutes(nextSleepBlock.start);
+
+                  // Add all nextDay blocks that end before or at boundary to me
+                  nextDay.intervals.forEach(intv => {
+                      if (isSleep(intv)) return; // Should not happen if before boundary, but safety
+                      if (timeToMinutes(intv.end) <= boundaryMin) {
+                          const dur = timeToMinutes(intv.end) - timeToMinutes(intv.start);
+                          sums[intv.categoryId] = (sums[intv.categoryId] || 0) + dur;
+                      }
+                  });
+              }
+          }
+      }
+
+      // Case B: I am Day 2 (curr). Shift my early non-sleeps to Prev Day (subtract from me).
+      if (prevDay && prevDay.intervals && prevDay.intervals.length > 0) {
+          const prevLast = prevDay.intervals[prevDay.intervals.length - 1];
+          const myFirst = day.intervals[0];
+
+          const prevLastIsSleep = isSleep(prevLast);
+          const myFirstIsSleep = isSleep(myFirst);
+
+          if (!prevLastIsSleep && !myFirstIsSleep) {
+               // Find my first sleep block
+               const mySleepBlock = day.intervals.find(i => isSleep(i));
+
+               if (mySleepBlock) {
+                   const boundaryMin = timeToMinutes(mySleepBlock.start);
+
+                   // Subtract all my blocks that end before or at boundary
+                   day.intervals.forEach(intv => {
+                      if (isSleep(intv)) return;
+                      if (timeToMinutes(intv.end) <= boundaryMin) {
+                          const dur = timeToMinutes(intv.end) - timeToMinutes(intv.start);
+                          sums[intv.categoryId] = (sums[intv.categoryId] || 0) - dur;
+                      }
+                   });
+               }
+          }
+      }
+
+      return sums;
+    }
+
+    function renderMultiDayView() {
+      const html = `
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h2>Multi‑day Summary</h2>
+              <div class="card-subtitle">
+                View total hours per category for a range of days. (Prototype aggregates from in‑memory data.)
+              </div>
+            </div>
+          </div>
+
+          <div class="card-section">
+            <div class="range-controls">
+              <span class="form-label" style="margin-bottom:0;">Quick ranges</span>
+              <button class="btn sm secondary" data-range="7">Last 7 days</button>
+              <button class="btn sm secondary" data-range="30">Last 30 days</button>
+              <button class="btn sm secondary" data-range="this-week">This week</button>
+              <button class="btn sm secondary" data-range="this-month">This month</button>
+              <span class="form-label" style="margin:0 0 0 8px;">Custom</span>
+              <input type="date" id="multi-start" />
+              <input type="date" id="multi-end" />
+              <button class="btn sm secondary" id="btn-apply-range">Apply</button>
+            </div>
+          </div>
+
+          <div class="card-section">
+            <div class="table-wrapper" style="max-height:360px; overflow:auto;">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Template</th>
+                    ${state.categories.map(c => `<th>${c.name}</th>`).join('')}
+                    <th>Note</th>
+                  </tr>
+                </thead>
+                <tbody id="multi-tbody">
+                  <!-- rows injected by JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      `;
+      viewContainer.innerHTML = html;
+
+      // Default range: last 7 days from today
+      const end = new Date();
+      const start = new Date();
+      start.setDate(end.getDate() - 6);
+
+      const startStr = dateToLocalISO(start);
+      const endStr = dateToLocalISO(end);
+
+      document.getElementById('multi-start').value = startStr;
+      document.getElementById('multi-end').value = endStr;
+
+            function fillTable(startDateStr, endDateStr) {
+        const tbody = document.getElementById('multi-tbody');
+        tbody.innerHTML = '';
+        const startDate = parseLocalISODate(startDateStr);
+        const endDate = parseLocalISODate(endDateStr);
+        if (isNaN(startDate) || isNaN(endDate) || endDate < startDate) {
+          tbody.innerHTML = `<tr><td colspan="${3 + state.categories.length}" class="muted">Invalid date range.</td></tr>`;
+          return;
+        }
+
+        // --- Pre-calculate totals and store rows ---
+        const catTotals = {};
+        state.categories.forEach(c => catTotals[c.id] = 0);
+        let rangeDayCount = 0;
+        const dayRows = []; 
+        let anyRow = false;
+
+        const cur = new Date(startDate);
+
+        while (cur <= endDate) {
+          rangeDayCount++;
+          const dStr = dateToLocalISO(cur);
+          const day = state.days[dStr];
+
+          if (day) {
+            anyRow = true;
+            const actual = getAdjustedDayStats(dStr);
+
+            // Accumulate totals
+            state.categories.forEach(c => {
+               catTotals[c.id] += (actual[c.id] || 0);
+            });
+
+            const tmpl = getTemplate(day.templateId);
+            const row = document.createElement('tr');
+
+            // Truncate note
+            const notePreview = day.note 
+              ? (day.note.length > 40 ? day.note.substring(0, 40) + '…' : day.note)
+              : '—';
+
+            row.className = 'clickable-row';
+            row.style.cursor = 'pointer';
+            row.innerHTML = `
+              <td><strong>${dStr}</strong></td>
+              <td>${tmpl ? tmpl.name : '-'}</td>
+              ${state.categories.map(c => { const cls = c.starred ? 'tagged-cell' : ''; return `<td class="${cls}">${minutesToHM(actual[c.id] || 0)}</td>`; }).join('')}
+              <td title="${day.note || ''}" style="max-width:150px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+                <span class="muted">${notePreview}</span>
+              </td>
+            `;
+
+            // Click handler
+            row.addEventListener('click', () => {
+              state.selectedDate = dStr;
+              state.selectedView = 'day-entry';
+              document.querySelectorAll('.nav-button').forEach(b => {
+                b.classList.toggle('nav-active', b.getAttribute('data-view') === 'day-entry');
+              });
+              render();
+            });
+
+            dayRows.push(row);
+          }
+          cur.setDate(cur.getDate() + 1);
+        }
+
+        // --- Render: Goals, Average, then Days ---
+
+        // 1. Goals Row
+        const goalsRow = document.createElement('tr');
+        goalsRow.style.background = 'rgba(var(--color-orange-500-rgb), 0.08)';
+        goalsRow.innerHTML = `
+          <td style="font-weight:550;">Daily Goals</td>
+          <td>—</td>
+          ${state.categories.map(c => {
+            const goal = c.dailyGoalMinutes;
+            const cls = c.starred ? 'tagged-cell' : '';
+            return `<td class="${cls}" style="font-weight:550;">${goal != null ? minutesToHM(goal) : '—'}</td>`;
+          }).join('')}
+          <td>—</td>
+        `;
+        tbody.appendChild(goalsRow);
+
+        // 2. Average Row (New)
+        if (rangeDayCount > 0) {
+            const avgRow = document.createElement('tr');
+            avgRow.style.background = 'rgba(var(--color-teal-500-rgb), 0.08)';
+            avgRow.innerHTML = `
+              <td style="font-weight:550;">Average</td>
+              <td>—</td>
+              ${state.categories.map(c => {
+                const avgMins = Math.round(catTotals[c.id] / rangeDayCount);
+                const cls = c.starred ? 'tagged-cell' : '';
+                return `<td class="${cls}" style="font-weight:550;">${minutesToHM(avgMins)}</td>`;
+              }).join('')}
+              <td><span class="muted">(${rangeDayCount} days)</span></td>
+            `;
+            tbody.appendChild(avgRow);
+        }
+
+        // 3. Day Rows
+        if (dayRows.length > 0) {
+            dayRows.forEach(r => tbody.appendChild(r));
+        } else {
+          const noDataRow = document.createElement('tr');
+          noDataRow.innerHTML = `<td colspan="${3 + state.categories.length}" class="muted">No records in this period.</td>`;
+          tbody.appendChild(noDataRow);
+        }
+      }
+
+      fillTable(startStr, endStr);
+
+      document.querySelectorAll('.range-controls button[data-range]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const val = btn.getAttribute('data-range');
+          const now = new Date();
+          let s = new Date(now);
+          let e = new Date(now);
+          if (val === '7') {
+            s.setDate(e.getDate() - 6);
+          } else if (val === '30') {
+            s.setDate(e.getDate() - 29);
+          } else if (val === 'this-week') {
+            const day = e.getDay(); // 0=Sun
+            const diff = (day + 6) % 7;
+            s.setDate(e.getDate() - diff);
+          } else if (val === 'this-month') {
+            s = new Date(e.getFullYear(), e.getMonth(), 1);
+          }
+          document.getElementById('multi-start').value = dateToLocalISO(s);
+          document.getElementById('multi-end').value = dateToLocalISO(e);
+          fillTable(dateToLocalISO(s), dateToLocalISO(e));
+        });
+      });
+
+      document.getElementById('btn-apply-range').addEventListener('click', () => {
+        const s = document.getElementById('multi-start').value;
+        const e = document.getElementById('multi-end').value;
+        fillTable(s, e);
+      });
+    }
+
+    function renderTemplatesView() {
+      const tmpl = getTemplate(state.selectedTemplateId);
+
+      // Persistent draft so Add Block / edits survive re-render
+      if (!state._templateDraft || state._templateDraft.templateId !== tmpl.id) {
+        const copy = JSON.parse(JSON.stringify(tmpl));
+        if (!Array.isArray(copy.entries)) {
+          copy.entries = Array.isArray(copy.slots) ? copy.slots : [];
+        }
+        state._templateDraft = { templateId: tmpl.id, data: copy };
+        state._tmplEditIdx = null;
+      }
+
+      const workingTemplate = state._templateDraft.data;
+      if (!Array.isArray(workingTemplate.entries)) workingTemplate.entries = [];
+
+      const plannedGoalCats = computePlannedGoalCategoryMinutes(workingTemplate);
+
+      const html = `
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h2>Day Templates</h2>
+              <div class="card-subtitle">
+                Define planned schedules as time blocks. Overnight blocks are allowed.
+              </div>
+            </div>
+            <div class="chip-row" style="margin-top:6px;">
+              <span class="chip highlight">Planned (goal cats): ${minutesToHM(plannedGoalCats)}</span>
+            </div>
+          </div>
+
+          <div class="card-section">
+            <div style="display:grid; grid-template-columns: 1fr 1fr auto; gap:12px; align-items:flex-end; max-width:680px;">
+              <div style="display:flex; flex-direction:column; gap:4px;">
+                <label class="form-label" for="template-select">Template</label>
+                <select id="template-select" class="form-control">
+                  ${state.templates.map(t => `
+                    <option value="${t.id}" ${t.id === state.selectedTemplateId ? 'selected' : ''}>${escapeHtml(t.name)}</option>
+                  `).join('')}
+                </select>
+              </div>
+
+              <div style="display:flex; flex-direction:column; gap:4px;">
+                <label class="form-label" for="template-name-input">Name / Day type</label>
+                <input id="template-name-input" class="form-control" value="${escapeHtml(workingTemplate.name || '')}" />
+              </div>
+
+              <div style="display:flex; gap:8px; justify-content:flex-end;">
+                <button class="btn sm secondary" id="btn-new-template">New Template</button>
+              </div>
+            </div>
+            <div class="form-hint" style="margin-top:6px;">Changes are not saved until you click Save below.</div>
+          </div>
+
+          <div class="card-section">
+            <h3 style="font-size:14px;">Blocks</h3>
+            <div class="split-editor">
+              <div class="table-wrapper" style="max-height: calc(100vh - 360px); overflow:auto;">
+                <table>
+                  <thead>
+                    <tr>
+                      <th style="width:140px;">Time</th>
+                      <th style="width:180px;">Category</th>
+                      <th>Description</th>
+                      <th style="width:90px;"></th>
+                    </tr>
+                  </thead>
+                  <tbody id="tmpl-blocks-tbody">
+                    ${workingTemplate.entries.map((entry, idx) => {
+                      const start = normalizeTimeToHHMM(entry.start) || '----';
+                      const end = normalizeTimeToHHMM(entry.end) || '----';
+                      const cat = entry.categoryId ? getCategory(entry.categoryId) : null;
+                      const isSel = state._tmplEditIdx === idx;
+                      return `
+                        <tr class="click-row ${isSel ? 'row-selected' : ''}" data-idx="${idx}">
+                          <td style="font-size:12px;">${start}-${end}</td>
+                          <td>${cat ? escapeHtml(cat.name) : '<span class="muted">None</span>'}</td>
+                          <td><span class="template-slot-description">${escapeHtml(entry.description || '')}</span></td>
+                          <td style="white-space:nowrap;">
+                            <button class="btn sm text btn-delete-block" title="Delete">Delete</button>
+                          </td>
+                        </tr>
+                      `;
+                    }).join('')}
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="editor-panel">
+                <div class="editor-title" id="tmpl-editor-title">Edit Block</div>
+
+                <div class="form-row" style="grid-template-columns: repeat(4, minmax(90px, 1fr));">
+                  <div class="form-field">
+                    <label class="form-label">Start hour</label>
+                    <select class="form-control" id="tmpl-start-h">${hourOptions('')}</select>
+                  </div>
+                  <div class="form-field">
+                    <label class="form-label">Start min (×5)</label>
+                    <select class="form-control" id="tmpl-start-m">${minute5Options('')}</select>
+                  </div>
+                  <div class="form-field">
+                    <label class="form-label">End hour</label>
+                    <select class="form-control" id="tmpl-end-h">${hourOptions('', 24)}</select>
+                  </div>
+                  <div class="form-field">
+                    <label class="form-label">End min (×5)</label>
+                    <select class="form-control" id="tmpl-end-m">${minute5Options('')}</select>
+                  </div>
+                </div>
+
+                <div class="form-field" style="margin-top:12px;">
+                  <label class="form-label">Category</label>
+                  <select class="form-control" id="tmpl-category">
+                    <option value="">None</option>
+                    ${state.categories.map(c => `
+                      <option value="${c.id}">${escapeHtml(c.name)}</option>
+                    `).join('')}
+                  </select>
+                </div>
+
+                <div class="form-field" style="margin-top:12px;">
+                  <label class="form-label">Description</label>
+                  <input class="form-control" id="tmpl-desc" placeholder="Short note…" />
+                </div>
+
+                <div style="display:flex; gap:8px; margin-top:12px;">
+                  <button class="btn secondary" id="tmpl-edit-clear">Clear</button>
+                  <button class="btn" id="tmpl-edit-save">Apply</button>
+                </div>
+
+                <div class="form-hint" style="margin-top:8px;">
+                  Click a block row to load it here. Apply updates the draft immediately; Save Changes commits to the template.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-section" style="display:flex; gap:8px; justify-content:space-between; align-items:center; border-top:1px solid rgba(var(--color-brown-600-rgb), 0.12); padding-top:16px;">
+            <div>
+              <button class="btn secondary" id="btn-add-block">Add Block</button>
+            </div>
+            <div style="display:flex; gap:8px;">
+              <button class="btn secondary" id="btn-cancel-template">Cancel</button>
+              <button class="btn" id="btn-save-template">Save Changes</button>
+            </div>
+          </div>
+        </div>
+      `;
+      viewContainer.innerHTML = html;
+
+      const minuteToNearest5 = (mStr) => {
+        const n = Number(mStr);
+        if (!Number.isFinite(n)) return '';
+        const r = Math.round(n / 5) * 5;
+        return String(Math.max(0, Math.min(55, r)));
+      };
+
+      function loadBlockToPanel(idx) {
+        if (idx == null || idx < 0 || idx >= workingTemplate.entries.length) return;
+        state._tmplEditIdx = idx;
+        const entry = workingTemplate.entries[idx];
+        const s = parseHHMMParts(entry.start);
+        const e = parseHHMMParts(entry.end);
+
+        // re-render select options so selected values appear
+        document.getElementById('tmpl-start-h').innerHTML = hourOptions(s.h);
+        document.getElementById('tmpl-start-m').innerHTML = minute5Options(minuteToNearest5(s.m));
+        document.getElementById('tmpl-end-h').innerHTML = hourOptions(e.h, 24);
+        document.getElementById('tmpl-end-m').innerHTML = minute5Options(minuteToNearest5(e.m));
+
+        document.getElementById('tmpl-category').value = entry.categoryId || '';
+        document.getElementById('tmpl-desc').value = entry.description || '';
+        document.getElementById('tmpl-editor-title').textContent = `Edit Block #${idx + 1}`;
+
+        // highlight selected row
+        document.querySelectorAll('#tmpl-blocks-tbody tr').forEach(tr => {
+          const i = Number(tr.getAttribute('data-idx'));
+          tr.classList.toggle('row-selected', i === state._tmplEditIdx);
+        });
+      }
+
+      function clearPanel() {
+        state._tmplEditIdx = null;
+        document.getElementById('tmpl-start-h').innerHTML = hourOptions('');
+        document.getElementById('tmpl-start-m').innerHTML = minute5Options('');
+        document.getElementById('tmpl-end-h').innerHTML = hourOptions('', 24);
+        document.getElementById('tmpl-end-m').innerHTML = minute5Options('');
+        document.getElementById('tmpl-category').value = '';
+        document.getElementById('tmpl-desc').value = '';
+        document.getElementById('tmpl-editor-title').textContent = 'Edit Block';
+
+        document.querySelectorAll('#tmpl-blocks-tbody tr').forEach(tr => tr.classList.remove('row-selected'));
+      }
+
+      document.getElementById('template-select').addEventListener('change', e => {
+        state.selectedTemplateId = e.target.value;
+        state._templateDraft = null;
+        state._tmplEditIdx = null;
+        render();
+      });
+
+      document.getElementById('template-name-input').addEventListener('input', e => {
+        workingTemplate.name = e.target.value;
+      });
+
+      document.getElementById('btn-new-template').addEventListener('click', () => {
+        openNewTemplateModal(() => {
+          state._templateDraft = null;
+          state._tmplEditIdx = null;
+          render();
+        });
+      });
+
+      document.getElementById('btn-add-block').addEventListener('click', () => {
+        workingTemplate.entries.push({ start: '06:00', end: '06:30', categoryId: null, description: '' });
+        state._tmplEditIdx = workingTemplate.entries.length - 1;
+        renderTemplatesView();
+      });
+
+      document.getElementById('btn-cancel-template').addEventListener('click', () => {
+        state._templateDraft = null;
+        state._tmplEditIdx = null;
+        render();
+      });
+
+      document.getElementById('btn-save-template').addEventListener('click', () => {
+        const newName = document.getElementById('template-name-input').value.trim();
+        if (newName) tmpl.name = newName;
+
+        const cleaned = (workingTemplate.entries || []).map(e => ({
+          start: normalizeTimeToHHMM(e.start),
+          end: normalizeTimeToHHMM(e.end),
+          categoryId: (e.categoryId && String(e.categoryId).trim()) ? String(e.categoryId).trim() : null,
+          description: e.description ? String(e.description) : ''
+        })).filter(e => e.start && e.end);
+
+        cleaned.sort((a, b) => timeToMinutes(a.start) - timeToMinutes(b.start));
+
+        tmpl.entries = cleaned;
+        tmpl.slots = cleaned; // keep compatibility
+
+        state._templateDraft = null;
+        state._tmplEditIdx = null;
+        render();
+      });
+
+      // row click -> load panel
+      document.querySelectorAll('#tmpl-blocks-tbody tr.click-row').forEach(tr => {
+        tr.addEventListener('click', () => {
+          const idx = Number(tr.getAttribute('data-idx'));
+          loadBlockToPanel(idx);
+        });
+      });
+
+      document.querySelectorAll('.btn-delete-block').forEach(btn => {
+        btn.addEventListener('click', e => {
+          e.stopPropagation();
+          const tr = e.target.closest('tr');
+          const idx = Number(tr.getAttribute('data-idx'));
+          if (!confirm('Delete this block?')) return;
+          workingTemplate.entries.splice(idx, 1);
+          if (state._tmplEditIdx === idx) state._tmplEditIdx = null;
+          if (state._tmplEditIdx != null && state._tmplEditIdx > idx) state._tmplEditIdx--;
+          renderTemplatesView();
+        });
+      });
+
+      document.getElementById('tmpl-edit-clear').addEventListener('click', clearPanel);
+
+      document.getElementById('tmpl-edit-save').addEventListener('click', () => {
+        if (state._tmplEditIdx == null) return;
+        const idx = state._tmplEditIdx;
+        const entry = workingTemplate.entries[idx];
+
+        const sh = document.getElementById('tmpl-start-h').value;
+        const sm = document.getElementById('tmpl-start-m').value;
+        const eh = document.getElementById('tmpl-end-h').value;
+        const em = document.getElementById('tmpl-end-m').value;
+
+        const start = buildHHMM(sh, sm);
+        const end = buildHHMM(eh, em);
+        if (!start || !end) { alert('Start and end time are required.'); return; }
+
+        entry.start = start;
+        entry.end = end;
+        entry.categoryId = document.getElementById('tmpl-category').value || null;
+        entry.description = document.getElementById('tmpl-desc').value || '';
+
+        renderTemplatesView();
+      });
+
+      // restore selection if present
+      if (state._tmplEditIdx != null) {
+        loadBlockToPanel(state._tmplEditIdx);
+      } else {
+        clearPanel();
+      }
+    }
+
+    function renderCategoriesView() {
+      const goalSum = computeGoalSumMinutes();
+      state._catEditIdx = state._catEditIdx ?? null;
+
+      const html = `
+        <div class="card card-fill">
+          <div class="card-header">
+            <div>
+              <div style="display:flex; align-items:center; gap:10px;">
+                <h2 style="margin:0;">Categories & Daily Goals</h2>
+                <button class="btn sm secondary" id="btn-new-category">Add Category</button>
+              </div>
+              <div class="chip-row" style="margin-top:6px;">
+                <span class="chip highlight">Goal sum (all categories): ${minutesToHM(goalSum)}</span>
+              </div>
+              <div class="card-subtitle">
+                Manage the master activity categories and optional daily goals (used in day and multi‑day summaries).
+              </div>
+            </div>
+          </div>
+
+          <div class="card-section grow">
+            <div class="split-editor">
+              <div class="table-wrapper" style="max-height: calc(100vh - 240px); overflow:auto;">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th style="width:140px;">Daily Goal</th>
+                      <th style="width:70px;">Tag</th>
+                      <th style="width:110px;">Used?</th>
+                      <th style="width:90px;"></th>
+                    </tr>
+                  </thead>
+                  <tbody id="cat-tbody">
+                    ${state.categories.map((cat, idx) => {
+                      const used = state.templates.some(t => (Array.isArray(t.entries) ? t.entries : (Array.isArray(t.slots) ? t.slots : [])).some(s => s.categoryId === cat.id));
+                      const goal = cat.dailyGoalMinutes != null ? minutesToHM(cat.dailyGoalMinutes) : '—';
+                      const rowCls = cat.starred ? 'tagged-cell' : '';
+                      const isSel = state._catEditIdx === idx;
+                      return `
+                        <tr class="click-row ${rowCls} ${isSel ? 'row-selected' : ''}" data-idx="${idx}">
+                          <td>${escapeHtml(cat.name)}</td>
+                          <td>${goal}</td>
+                          <td>${cat.starred ? '✓' : ''}</td>
+                          <td>${used ? 'Yes' : 'No'}</td>
+                          <td><button class="btn sm text btn-delete-cat">✕</button></td>
+                        </tr>
+                      `;
+                    }).join('')}
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="editor-panel">
+                <div class="editor-title" id="cat-editor-title">Edit Category</div>
+
+                <div class="form-field">
+                  <label class="form-label">Name</label>
+                  <input class="form-control" id="cat-edit-name" />
+                </div>
+
+                <div class="form-row" style="grid-template-columns: 1fr 1fr;">
+                  <div class="form-field">
+                    <label class="form-label">Goal hours</label>
+                    <select class="form-control" id="cat-edit-goal-h">${hourOptions('', 24)}</select>
+                  </div>
+                  <div class="form-field">
+                    <label class="form-label">Goal minutes (×5)</label>
+                    <select class="form-control" id="cat-edit-goal-m">${minute5Options('')}</select>
+                  </div>
+                </div>
+
+                <label style="display:flex; gap:8px; align-items:center; margin-top:8px;">
+                  <input type="checkbox" id="cat-edit-tag" />
+                  <span class="muted" style="font-size:12px;">Tag (highlight)</span>
+                </label>
+
+                <div style="display:flex; gap:8px; margin-top:12px;">
+                  <button class="btn secondary" id="cat-edit-clear">Clear</button>
+                  <button class="btn" id="cat-edit-save">Save</button>
+                </div>
+
+                <div class="form-hint" style="margin-top:8px;">Click a row to load it here. Tag drives highlighting in Day + Multi‑day summaries.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      viewContainer.innerHTML = html;
+
+      const minuteToNearest5 = (mStr) => {
+        const n = Number(mStr);
+        if (!Number.isFinite(n)) return '';
+        const r = Math.round(n / 5) * 5;
+        return String(Math.max(0, Math.min(55, r)));
+      };
+
+      function loadCatToPanel(idx){
+        if (idx == null || idx < 0 || idx >= state.categories.length) return;
+        state._catEditIdx = idx;
+        const cat = state.categories[idx];
+        const parts = cat.dailyGoalMinutes != null
+          ? { h: String(Math.floor(cat.dailyGoalMinutes / 60)), m: String(cat.dailyGoalMinutes % 60) }
+          : { h:'', m:'' };
+
+        document.getElementById('cat-edit-name').value = cat.name || '';
+        document.getElementById('cat-edit-goal-h').innerHTML = hourOptions(parts.h, 24);
+        document.getElementById('cat-edit-goal-m').innerHTML = minute5Options(minuteToNearest5(parts.m));
+        document.getElementById('cat-edit-tag').checked = !!cat.starred;
+        document.getElementById('cat-editor-title').textContent = `Edit Category`;
+
+        document.querySelectorAll('#cat-tbody tr').forEach(tr => {
+          const i = Number(tr.getAttribute('data-idx'));
+          tr.classList.toggle('row-selected', i === state._catEditIdx);
+        });
+      }
+
+      function clearPanel(){
+        state._catEditIdx = null;
+        document.getElementById('cat-edit-name').value = '';
+        document.getElementById('cat-edit-goal-h').innerHTML = hourOptions('', 24);
+        document.getElementById('cat-edit-goal-m').innerHTML = minute5Options('');
+        document.getElementById('cat-edit-tag').checked = false;
+        document.getElementById('cat-editor-title').textContent = 'Edit Category';
+        document.querySelectorAll('#cat-tbody tr').forEach(tr => tr.classList.remove('row-selected'));
+      }
+
+      function uniqueNewCategoryName(){
+        const base = 'New Category';
+        if (!state.categories.some(c => c.name === base)) return base;
+        for (let i=2; i<1000; i++){
+          const name = `${base} ${i}`;
+          if (!state.categories.some(c => c.name === name)) return name;
+        }
+        return `${base} ${Date.now()}`;
+      }
+
+      document.getElementById('btn-new-category').addEventListener('click', () => {
+        const name = uniqueNewCategoryName();
+        const cat = addCategory(name);
+        if (!cat) return;
+        renderCategoriesView();
+        const idx = state.categories.findIndex(c => c.id === cat.id);
+        if (idx >= 0) loadCatToPanel(idx);
+      });
+
+      document.querySelectorAll('#cat-tbody tr.click-row').forEach(tr => {
+        tr.addEventListener('click', (e) => {
+          const idx = Number(tr.getAttribute('data-idx'));
+          loadCatToPanel(idx);
+        });
+      });
+
+      document.querySelectorAll('.btn-delete-cat').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const tr = e.target.closest('tr');
+          const idx = Number(tr.getAttribute('data-idx'));
+          if (!confirm('Delete this category?')) return;
+          state.categories.splice(idx, 1);
+          if (state._catEditIdx === idx) state._catEditIdx = null;
+          if (state._catEditIdx != null && state._catEditIdx > idx) state._catEditIdx--;
+          renderCategoriesView();
+        });
+      });
+
+      document.getElementById('cat-edit-clear').addEventListener('click', clearPanel);
+
+      document.getElementById('cat-edit-save').addEventListener('click', () => {
+        if (state._catEditIdx == null) return;
+        const cat = state.categories[state._catEditIdx];
+
+        const name = document.getElementById('cat-edit-name').value.trim();
+        if (!name) { alert('Name is required.'); return; }
+
+        const h = document.getElementById('cat-edit-goal-h').value;
+        const m = document.getElementById('cat-edit-goal-m').value;
+
+        cat.name = name;
+        cat.dailyGoalMinutes = goalMinutesFromHM(h, m);
+        cat.starred = !!document.getElementById('cat-edit-tag').checked;
+
+        const keepIdx = state._catEditIdx;
+        renderCategoriesView();
+        if (keepIdx != null && keepIdx < state.categories.length) {
+          state._catEditIdx = keepIdx;
+          // panel will be restored below
+        }
+      });
+
+      // restore selection if present
+      if (state._catEditIdx != null) {
+        loadCatToPanel(state._catEditIdx);
+      } else {
+        clearPanel();
+      }
+    }
+
+    function renderSettingsView() {
+      const html = `
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h2>Settings & Data Management</h2>
+    <div id="pc-import-controls" style="margin: 15px 0; padding: 10px; border: 1px dashed #666; display:none;">
+        <strong>PC Sync:</strong>
+        <button class="btn-primary" onclick="importMobileData()">Import Mobile Buffer</button>
+        <span class="text-muted" style="margin-left:10px;">(Reads from mobile_sync folder)</span>
+    </div>
+    
+              <div class="card-subtitle">
+                In the final version, this page controls the SQLite data file location (OneDrive) and backup/restore.
+              </div>
+            </div>
+          </div>
+
+          <div class="card-section">
+            <div class="form-row">
+              <div class="form-field">
+                <label class="form-label">Current data file location</label>
+          <div class="form-hint">Startup: <span class="tag" id="startup-info"></span></div>
+                <div class="tag">${state.dataLocation}</div>
+                <div class="form-hint">
+                  Your time tracker data lives here. On PC it points to OneDrive; on Android it accesses OneDrive via the cloud file picker.
+                </div>
+              </div>
+              <div class="form-field">
+                <label class="form-label">Change data location</label>
+                <button class="btn secondary" id="btn-change-location">Select folder…</button>
+                <div class="form-hint">
+                  Click to select the folder where your time tracker data will be stored. On Android, you can link your OneDrive folder.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-section" id="mobile-sync-controls" style="display:none;">
+            <h3 style="font-size:14px;">Mobile Sync</h3>
+            <div class="form-hint" style="margin-bottom:10px;">
+              Use these buttons on your phone to manage data transfer.
+            </div>
+            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+              <button class="btn secondary" onclick="pickMobileSyncFolder()">1. Select mobile_sync folder…</button>
+              <button class="btn secondary" onclick="refreshMobileReference()">2. Refresh categories/templates</button>
+              <button class="btn secondary" onclick="downloadMobileBuffer()">3. Send to PC</button>
+              <button class="btn secondary" style="border-color: #d32f2f; color: #d32f2f;" onclick="wipeMobileData()">2. Clear Recorded Data</button>
+            </div>
+            <div class="form-hint" style="margin-top:8px;">
+              <strong>Select folder:</strong> Link your OneDrive <em>mobile_sync</em> folder once on this phone.<br>
+              <strong>Refresh:</strong> Loads categories/templates from PC via <em>mobile_reference.json</em> (published automatically by the PC app).<br>
+              <strong>Send:</strong> Writes/overwrites <em>mobile_buffer.json</em> into that folder, then clears the mobile buffer on this phone.<br>
+              <strong>Clear:</strong> Deletes recorded days from this device after you have confirmed they are safe on PC.
+            </div>
+          </div>
+          <div class="card-section">
+            <h3 style="font-size:14px;">Backup & Restore</h3>
+            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+              <button class="btn secondary" id="btn-backup-json">Backup (JSON)</button>
+              <button class="btn secondary" id="btn-restore-json">Restore (JSON)</button>
+              <button class="btn secondary" id="btn-export-excel">Export to Excel</button>
+            </div>
+            <div class="form-hint" style="margin-top:8px;">
+              <strong>Backup:</strong> Downloads all categories, templates, and recorded days as JSON file. Use this to transfer data or keep local copies.<br>
+              <strong>Restore:</strong> Load a previously backed-up JSON file to restore all your data.<br>
+              <strong>Export:</strong> Creates per-day Excel workbook with template vs actual time comparison.
+            </div>
+          </div>
+        </div>
+      `;
+      viewContainer.innerHTML = html;
+
+      // Mobile Sync Visibility
+      if (typeof isMobile !== "undefined" && isMobile) {
+         const mobCtrl = document.getElementById("mobile-sync-controls");
+         if (mobCtrl) mobCtrl.style.display = "block";
+      }
+
+      if (typeof isMobile !== 'undefined') {
+        const pcCtrl = document.getElementById('pc-import-controls');
+        const mobCtrl = document.getElementById('mobile-sync-controls');
+        
+        if (!isMobile) {
+             if (pcCtrl) pcCtrl.style.display = 'block';
+             if (mobCtrl) mobCtrl.style.display = 'none';
+        } else {
+             if (pcCtrl) pcCtrl.style.display = 'none';
+             if (mobCtrl) mobCtrl.style.display = 'block';
+        }
+      }
+    // Startup debug
+    setTimeout(() => {
+      const el = document.getElementById('startup-info');
+      if (el) el.textContent = state._startupInfo || 'Not run yet';
+      const el2 = document.getElementById('current-location');
+      if (el2) el2.textContent = state.dataLocation || '';
+    }, 0);
+
+
+      document.getElementById('btn-change-location').addEventListener('click', async () => {
+      if (typeof isMobile !== 'undefined' && isMobile) {
+        alert('On mobile, do not change the PC master data location here. Use Mobile Sync controls instead.');
+      } else {
+        await TTStorage.pickFolderAndActivate();
+        render();
+      }
+    });
+
+      document.getElementById('btn-backup-json').addEventListener('click', async () => {
+    await TTStorage.backupToFolderOnly();
+  });
+
+      document.getElementById('btn-restore-json').addEventListener('click', () => {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = 'application/json';
+        input.onchange = (e) => {
+          const file = e.target.files[0];
+          if (!file) return;
+          const reader = new FileReader();
+          reader.onload = (ev) => {
+            try {
+              const backup = JSON.parse(ev.target.result);
+              if (backup.state) {
+                state.categories = backup.state.categories || [];
+                state.templates = backup.state.templates || [];
+                state.days = backup.state.days || {};
+                render();
+                alert('Restore successful!');
+              }
+            } catch (err) {
+              alert('Error reading backup file: ' + err.message);
+            }
+          };
+          reader.readAsText(file);
+        };
+        input.click();
+      });
+
+      document.getElementById('btn-export-excel').addEventListener('click', () => {
+        // Stub: will wire real Excel export next iteration
+        alert('Excel export will be available in the next update. For now, use Backup (JSON) to save your data.');
+      });
+    }
+
+    // ========= Navigation & global actions =========
+    document.querySelectorAll('.nav-button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.nav-button').forEach(b => b.classList.remove('nav-active'));
+        btn.classList.add('nav-active');
+        state.selectedView = btn.getAttribute('data-view');
+        render();
+      });
+    });
+
+    document.getElementById('btn-backup').addEventListener('click', async () => {
+    await TTStorage.backupToFolderOnly();
+  });
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', e => {
+      if (e.isComposing || e.keyCode === 229) return;
+
+      if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable)) {
+        return;
+      }
+      const key = e.key.toLowerCase();
+      let targetView = null;
+      if (key === 'd') targetView = 'day-entry';
+      else if (key === 'm') targetView = 'multi-day';
+      else if (key === 't') targetView = 'templates';
+      else if (key === 'c') targetView = 'categories';
+      else if (key === 's') targetView = 'settings';
+      if (targetView) {
+        state.selectedView = targetView;
+        document.querySelectorAll('.nav-button').forEach(b => {
+          b.classList.toggle('nav-active', b.getAttribute('data-view') === targetView);
+        });
+        render();
+      }
+    });
+
+    // ========= Modal Helpers =========
+
+    function openAddCategoryModal(callback) {
+      const overlay = document.createElement('div');
+      overlay.className = 'modal-overlay';
+
+      overlay.innerHTML = `
+        <div class="modal-dialog">
+          <div class="modal-header">Add Category</div>
+          <div class="modal-body">
+            <div class="form-field">
+              <label class="form-label">Category Name</label>
+              <input type="text" class="form-control" id="modal-cat-name" placeholder="e.g., Reading" />
+            </div>
+
+            <div class="form-row" style="grid-template-columns: 1fr 1fr;">
+              <div class="form-field">
+                <label class="form-label">Daily goal hours</label>
+                <input type="number" min="0" max="23" step="1" class="form-control" id="modal-cat-goal-h" placeholder="7" />
+              </div>
+              <div class="form-field">
+                <label class="form-label">Daily goal minutes</label>
+                <input type="number" min="0" max="59" step="1" class="form-control" id="modal-cat-goal-m" placeholder="30" />
+              </div>
+            </div>
+
+            <label style="display:flex; gap:8px; align-items:center; margin-top:8px;">
+              <input type="checkbox" id="modal-cat-star" />
+              <span class="muted" style="font-size:12px;">Starred (highlight)</span>
+            </label>
+
+            <div class="form-hint" style="margin-top:8px;">Leave hours/minutes blank for “no goal”.</div>
+          </div>
+
+          <div class="modal-footer">
+            <button class="btn secondary" id="modal-cancel">Cancel</button>
+            <button class="btn" id="modal-save">Add</button>
+          </div>
+        </div>
+      `;
+
+      document.body.appendChild(overlay);
+      const nameInput = overlay.querySelector('#modal-cat-name');
+      nameInput.focus();
+
+      const clampInt = (v, min, max) => {
+        if (String(v).trim() === '') return null;
+        const n = Number(v);
+        if (!Number.isFinite(n)) return null;
+        return Math.max(min, Math.min(max, Math.floor(n)));
+      };
+
+      overlay.querySelector('#modal-save').addEventListener('click', () => {
+        const name = nameInput.value.trim();
+        if (!name) return;
+
+        const h = clampInt(overlay.querySelector('#modal-cat-goal-h').value, 0, 23);
+        const m = clampInt(overlay.querySelector('#modal-cat-goal-m').value, 0, 59);
+
+        let goalMinutes = null;
+        if (h != null || m != null) goalMinutes = (h || 0) * 60 + (m || 0);
+
+        const starred = !!overlay.querySelector('#modal-cat-star')?.checked;
+        callback(name, goalMinutes, starred);
+        overlay.remove();
+      });
+
+      overlay.querySelector('#modal-cancel').addEventListener('click', () => overlay.remove());
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) overlay.remove();
+      });
+    }
+
+
+    function openAddCategoryFormModal(callback) {
+      const overlay = document.createElement('div');
+      overlay.className = 'modal-overlay';
+
+      overlay.innerHTML = `
+        <div class="modal-dialog">
+          <div class="modal-header">Add New Category</div>
+          <div class="modal-body">
+            <div class="form-field">
+              <label class="form-label">Category Name</label>
+              <input type="text" class="form-control" id="modal-cat-name" placeholder="e.g., Reading" />
+            </div>
+
+            <div class="form-row" style="grid-template-columns: 1fr 1fr;">
+              <div class="form-field">
+                <label class="form-label">Daily goal hours</label>
+                <input type="number" min="0" max="23" step="1" class="form-control" id="modal-cat-goal-h" placeholder="7" />
+              </div>
+              <div class="form-field">
+                <label class="form-label">Daily goal minutes</label>
+                <input type="number" min="0" max="59" step="1" class="form-control" id="modal-cat-goal-m" placeholder="30" />
+              </div>
+            </div>
+
+            <label style="display:flex; gap:8px; align-items:center; margin-top:8px;">
+              <input type="checkbox" id="modal-cat-star" />
+              <span class="muted" style="font-size:12px;">Starred (highlight)</span>
+            </label>
+
+            <div class="form-hint" style="margin-top:8px;">Leave hours/minutes blank for “no goal”.</div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn secondary" id="modal-cancel">Cancel</button>
+            <button class="btn" id="modal-save">Add</button>
+          </div>
+        </div>
+      `;
+
+      document.body.appendChild(overlay);
+      const nameInput = overlay.querySelector('#modal-cat-name');
+      nameInput.focus();
+
+      const clampInt = (v, min, max) => {
+        if (String(v).trim() === '') return null;
+        const n = Number(v);
+        if (!Number.isFinite(n)) return null;
+        return Math.max(min, Math.min(max, Math.floor(n)));
+      };
+
+      overlay.querySelector('#modal-save').addEventListener('click', () => {
+        const name = nameInput.value.trim();
+        if (!name) return;
+
+        const h = clampInt(overlay.querySelector('#modal-cat-goal-h').value, 0, 23);
+        const m = clampInt(overlay.querySelector('#modal-cat-goal-m').value, 0, 59);
+
+        let goalMinutes = null;
+        if (h != null || m != null) goalMinutes = (h || 0) * 60 + (m || 0);
+
+        const starred = !!overlay.querySelector('#modal-cat-star')?.checked;
+        callback(name, goalMinutes, starred);
+        overlay.remove();
+      });
+
+      overlay.querySelector('#modal-cancel').addEventListener('click', () => overlay.remove());
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) overlay.remove();
+      });
+    }
+
+
+    function openEditCategoryModal(cat, callback) {
+      const overlay = document.createElement('div');
+      overlay.className = 'modal-overlay';
+
+      const mins = (cat.dailyGoalMinutes == null || !Number.isFinite(Number(cat.dailyGoalMinutes))) ? null : Number(cat.dailyGoalMinutes);
+      const hh = mins == null ? '' : String(Math.floor(mins / 60));
+      const mm = mins == null ? '' : String(mins % 60);
+
+      overlay.innerHTML = `
+        <div class="modal-dialog">
+          <div class="modal-header">Edit Category</div>
+          <div class="modal-body">
+            <div class="form-field">
+              <label class="form-label">Category Name</label>
+              <input type="text" class="form-control" id="modal-cat-name" value="${escapeHtml(cat.name)}" />
+            </div>
+
+            <div class="form-row" style="grid-template-columns: 1fr 1fr;">
+              <div class="form-field">
+                <label class="form-label">Daily goal hours</label>
+                <input type="number" min="0" max="23" step="1" class="form-control" id="modal-cat-goal-h" value="${escapeHtml(hh)}" placeholder="7" />
+              </div>
+              <div class="form-field">
+                <label class="form-label">Daily goal minutes</label>
+                <input type="number" min="0" max="59" step="1" class="form-control" id="modal-cat-goal-m" value="${escapeHtml(mm)}" placeholder="30" />
+              </div>
+            </div>
+
+            <label style="display:flex; gap:8px; align-items:center; margin-top:8px;">
+              <input type="checkbox" id="modal-cat-star" ${cat.starred ? 'checked' : ''} />
+              <span class="muted" style="font-size:12px;">Starred</span>
+            </label>
+
+            <div class="form-hint" style="margin-top:8px;">Clear both boxes for “no goal”.</div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn secondary" id="modal-cancel">Cancel</button>
+            <button class="btn" id="modal-save">Save</button>
+          </div>
+        </div>
+      `;
+
+      document.body.appendChild(overlay);
+
+      const clampInt = (v, min, max) => {
+        if (String(v).trim() === '') return null;
+        const n = Number(v);
+        if (!Number.isFinite(n)) return null;
+        return Math.max(min, Math.min(max, Math.floor(n)));
+      };
+
+      const nameInput = overlay.querySelector('#modal-cat-name');
+      nameInput.focus();
+
+      overlay.querySelector('#modal-save').addEventListener('click', () => {
+        const newName = nameInput.value.trim();
+        if (!newName) return;
+
+        const h = clampInt(overlay.querySelector('#modal-cat-goal-h').value, 0, 23);
+        const m = clampInt(overlay.querySelector('#modal-cat-goal-m').value, 0, 59);
+
+        let goalMinutes = null;
+        if (h != null || m != null) goalMinutes = (h || 0) * 60 + (m || 0);
+
+        cat.name = newName;
+        cat.dailyGoalMinutes = goalMinutes;
+        cat.starred = !!overlay.querySelector('#modal-cat-star')?.checked;
+
+        callback && callback();
+        overlay.remove();
+      });
+
+      overlay.querySelector('#modal-cancel').addEventListener('click', () => overlay.remove());
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) overlay.remove();
+      });
+    }
+
+
+    function openEditSlotModal(slot, callback) {
+      const overlay = document.createElement('div');
+      overlay.className = 'modal-overlay';
+
+      const startVal = normalizeTimeToHHMM(slot.start) || '';
+      const endVal = normalizeTimeToHHMM(slot.end) || '';
+
+      const parseHHMM = (t) => {
+        if (!t || !t.includes(':')) return { h: '', m: '' };
+        const [h, m] = t.split(':').map(x => x.trim());
+        return { h, m };
+      };
+
+      const s = parseHHMM(startVal);
+      const e = parseHHMM(endVal);
+
+      overlay.innerHTML = `
+        <div class="modal-dialog">
+          <div class="modal-header">Edit Block</div>
+          <div class="modal-body">
+            <div class="form-row" style="grid-template-columns: repeat(4, minmax(90px, 1fr));">
+              <div class="form-field">
+                <label class="form-label">Start hour</label>
+                <input type="number" min="0" max="23" step="1" class="form-control" id="modal-slot-start-h" value="${escapeHtml(s.h)}" placeholder="6" />
+              </div>
+              <div class="form-field">
+                <label class="form-label">Start min</label>
+                <input type="number" min="0" max="59" step="1" class="form-control" id="modal-slot-start-m" value="${escapeHtml(s.m)}" placeholder="00" />
+              </div>
+              <div class="form-field">
+                <label class="form-label">End hour</label>
+                <input type="number" min="0" max="23" step="1" class="form-control" id="modal-slot-end-h" value="${escapeHtml(e.h)}" placeholder="6" />
+              </div>
+              <div class="form-field">
+                <label class="form-label">End min</label>
+                <input type="number" min="0" max="59" step="1" class="form-control" id="modal-slot-end-m" value="${escapeHtml(e.m)}" placeholder="30" />
+              </div>
+            </div>
+
+            <div class="form-field" style="margin-top:12px;">
+              <label class="form-label">Category</label>
+              <select class="form-control" id="modal-slot-category">
+                <option value="">None</option>
+                ${state.categories.map(c => `
+                  <option value="${c.id}" ${String(slot.categoryId || '') === String(c.id) ? 'selected' : ''}>${escapeHtml(c.name)}</option>
+                `).join('')}
+              </select>
+            </div>
+
+            <div class="form-field" style="margin-top:12px;">
+              <label class="form-label">Description</label>
+              <input type="text" class="form-control" id="modal-slot-desc" value="${escapeHtml(slot.description || '')}" placeholder="Optional" />
+              <div class="form-hint">Overnight blocks are allowed (end can be earlier than start).</div>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button class="btn secondary" id="modal-cancel">Cancel</button>
+            <button class="btn" id="modal-save">Save</button>
+          </div>
+        </div>
+      `;
+
+      document.body.appendChild(overlay);
+
+      const clampInt = (v, min, max) => {
+        const n = Number(v);
+        if (!Number.isFinite(n)) return null;
+        return Math.max(min, Math.min(max, Math.floor(n)));
+      };
+
+      overlay.querySelector('#modal-save').addEventListener('click', () => {
+        const sh = clampInt(overlay.querySelector('#modal-slot-start-h').value, 0, 23);
+        const sm = clampInt(overlay.querySelector('#modal-slot-start-m').value, 0, 59);
+        const eh = clampInt(overlay.querySelector('#modal-slot-end-h').value, 0, 23);
+        const em = clampInt(overlay.querySelector('#modal-slot-end-m').value, 0, 59);
+
+        if (sh == null || sm == null || eh == null || em == null) return;
+
+        slot.start = `${String(sh).padStart(2,'0')}:${String(sm).padStart(2,'0')}`;
+        slot.end = `${String(eh).padStart(2,'0')}:${String(em).padStart(2,'0')}`;
+        const catId = overlay.querySelector('#modal-slot-category').value;
+        slot.categoryId = catId ? catId : null;
+        slot.description = overlay.querySelector('#modal-slot-desc').value || '';
+
+        callback && callback();
+        overlay.remove();
+      });
+
+      overlay.querySelector('#modal-cancel').addEventListener('click', () => overlay.remove());
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) overlay.remove();
+      });
+    }
+
+
+    function openNewTemplateModal(callback) {
+      const overlay = document.createElement('div');
+      overlay.className = 'modal-overlay';
+      overlay.innerHTML = `
+        <div class="modal-dialog">
+          <div class="modal-header">New Template</div>
+          <div class="modal-body">
+            <div class="form-field">
+              <label class="form-label">Template Name</label>
+              <input type="text" class="form-control" id="modal-tmpl-name" placeholder="e.g., Weekend" />
+            </div>
+            <div class="form-field">
+              <label class="form-label" style="margin-bottom:8px;">Start from:</label>
+              <div style="display:flex; gap:8px;">
+                <button class="btn sm secondary" id="modal-tmpl-copy">Copy Current</button>
+                <button class="btn sm secondary" id="modal-tmpl-blank">Blank</button>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn secondary" id="modal-cancel">Cancel</button>
+            <button class="btn" id="modal-save" disabled>Create</button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(overlay);
+      const nameInput = overlay.querySelector('#modal-tmpl-name');
+      const saveBtn = overlay.querySelector('#modal-save');
+      const copyBtn = overlay.querySelector('#modal-tmpl-copy');
+      const blankBtn = overlay.querySelector('#modal-tmpl-blank');
+      let mode = null;
+      
+      nameInput.focus();
+      copyBtn.addEventListener('click', () => {
+        mode = 'copy';
+        copyBtn.classList.add('button-highlight');
+        blankBtn.classList.remove('button-highlight');
+        saveBtn.disabled = false;
+      });
+      blankBtn.addEventListener('click', () => {
+        mode = 'blank';
+        blankBtn.classList.add('button-highlight');
+        copyBtn.classList.remove('button-highlight');
+        saveBtn.disabled = false;
+      });
+      
+      saveBtn.addEventListener('click', () => {
+        if (!mode || !nameInput.value.trim()) return;
+        const base = mode === 'copy' ? getTemplate(state.selectedTemplateId) : null;
+        const id = nameInput.value.trim().toLowerCase().replace(/\s+/g, '-') + '-' + Date.now().toString(36);
+        const slots = base ? base.slots.map(s => ({ ...s })) : generateEmptySlots();
+        state.templates.push({ id, name: nameInput.value.trim(), entries: slots, slots });
+        state.selectedTemplateId = id;
+        callback();
+        overlay.remove();
+      });
+      overlay.querySelector('#modal-cancel').addEventListener('click', () => overlay.remove());
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) overlay.remove();
+      });
+    }
+
+    // Initial status
+    state.dataLocation = 'Example: C:\\Users\\YOU\\OneDrive\\TimeTracker';
+    
+
+// =====================
+// TTStorage (Folder-based persistence)
+// - Stores a FileSystemDirectoryHandle in IndexedDB
+// - Reads/writes a single canonical data file in that folder
+// =====================
+const TTStorage = (() => {
+  const APP_DATA_FILENAME = 'time-tracker-data.json';
+  const MOBILE_REFERENCE_FILENAME = 'mobile_reference.json';
+  const IDB_DB = 'timeTrackerIdb';
+  const IDB_STORE = 'kv';
+  const IDB_KEY = 'tt_dirHandle_v1';
+
+  function hasFSAccessAPI() {
+    return (typeof window !== 'undefined') && ('showDirectoryPicker' in window);
+  }
+
+  function idbOpen() {
+    return new Promise((resolve, reject) => {
+      const req = indexedDB.open(IDB_DB, 1);
+      req.onupgradeneeded = () => {
+        const db = req.result;
+        if (!db.objectStoreNames.contains(IDB_STORE)) db.createObjectStore(IDB_STORE);
+      };
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = () => reject(req.error);
+    });
+  }
+
+  async function idbGet(key) {
+    const db = await idbOpen();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction(IDB_STORE, 'readonly');
+      const store = tx.objectStore(IDB_STORE);
+      const req = store.get(key);
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = () => reject(req.error);
+    });
+  }
+
+  async function idbSet(key, value) {
+    const db = await idbOpen();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction(IDB_STORE, 'readwrite');
+      const store = tx.objectStore(IDB_STORE);
+      const req = store.put(value, key);
+      req.onsuccess = () => resolve(true);
+      req.onerror = () => reject(req.error);
+    });
+  }
+
+  async function ensurePermission(handle, readWrite = true) {
+    if (!handle) return false;
+    const opts = { mode: readWrite ? 'readwrite' : 'read' };
+    if (handle.queryPermission) {
+      const q = await handle.queryPermission(opts);
+      if (q === 'granted') return true;
+    }
+    if (handle.requestPermission) {
+      const r = await handle.requestPermission(opts);
+      return r === 'granted';
+    }
+    return false;
+  }
+
+  function exportStateObject() {
+      const templates = (state.templates || []).map(t => {
+        const raw = Array.isArray(t.entries) ? t.entries : (Array.isArray(t.slots) ? t.slots : []);
+        const cleaned = raw.map(e => ({
+          start: normalizeTimeToHHMM(e.start),
+          end: normalizeTimeToHHMM(e.end),
+          categoryId: (e.categoryId && String(e.categoryId).trim()) ? String(e.categoryId).trim() : null,
+          description: e.description ? String(e.description) : ''
+        })).filter(e => e.start && e.end);
+        return { id: t.id, name: t.name || t.id, entries: cleaned, slots: cleaned };
+      });
+
+      const categories = (state.categories || [])
+        .filter(c => c && c.id && String(c.id).trim() && c.name && String(c.name).trim())
+        .map(c => ({
+          id: String(c.id).trim(),
+          name: String(c.name).trim(),
+          dailyGoalMinutes: (c.dailyGoalMinutes === null || c.dailyGoalMinutes === undefined || c.dailyGoalMinutes === '')
+            ? null
+            : Number(c.dailyGoalMinutes),
+          starred: !!c.starred
+        }));
+
+      const days = {};
+      Object.keys(state.days || {}).forEach(k => {
+        const d = state.days[k];
+        const intervals = (d.intervals || []).map(intv => ({
+          start: normalizeTimeToHHMM(intv.start),
+          end: normalizeTimeToHHMM(intv.end),
+          categoryId: (intv.categoryId && String(intv.categoryId).trim()) ? String(intv.categoryId).trim() : null,
+          note: intv.note ? String(intv.note) : ''
+        })).filter(intv => intv.start && intv.end);
+        days[k] = { ...d, date: d.date || k, intervals, note: d.note || '' };
+      });
+
+      return {
+        version: 1,
+        exportedAt: new Date().toISOString(),
+        state: { categories, templates, days }
+      };
+    }
+
+  function importStateObject(backup) {
+      if (!backup || !backup.state) return false;
+
+      if (backup.state.categories) {
+        state.categories = backup.state.categories
+          .filter(c => c && c.id && String(c.id).trim() && c.name && String(c.name).trim())
+          .map(c => ({
+            id: String(c.id).trim(),
+            name: String(c.name).trim(),
+            dailyGoalMinutes: (c.dailyGoalMinutes === null || c.dailyGoalMinutes === undefined || c.dailyGoalMinutes === '')
+              ? null
+              : Number(c.dailyGoalMinutes),
+            starred: !!c.starred
+          }));
+      }
+
+      if (backup.state.templates) {
+        state.templates = backup.state.templates.map(t => {
+          const raw = Array.isArray(t.entries) ? t.entries : (Array.isArray(t.slots) ? t.slots : []);
+          const cleaned = raw.map(e => ({
+            start: normalizeTimeToHHMM(e.start),
+            end: normalizeTimeToHHMM(e.end),
+            categoryId: (e.categoryId && String(e.categoryId).trim()) ? String(e.categoryId).trim() : null,
+            description: e.description ? String(e.description) : ''
+          })).filter(e => e.start && e.end);
+          return { id: t.id, name: t.name || t.id, entries: cleaned, slots: cleaned };
+        });
+
+        if (!state.templates.length) {
+          state.templates = [{ id: 'default', name: 'Default', entries: generateEmptySlots(), slots: generateEmptySlots() }];
+        }
+
+        if (!state.selectedTemplateId || !state.templates.some(t => t.id === state.selectedTemplateId)) {
+          state.selectedTemplateId = state.templates[0].id;
+        }
+      }
+
+      if (backup.state.days) {
+        state.days = backup.state.days;
+        Object.keys(state.days || {}).forEach(dStr => {
+          const d = state.days[dStr];
+          if (!d) return;
+          d.date = d.date || dStr;
+          d.note = d.note || '';
+          if (!Array.isArray(d.intervals)) d.intervals = [];
+          d.intervals = d.intervals.map(intv => ({
+            start: normalizeTimeToHHMM(intv.start),
+            end: normalizeTimeToHHMM(intv.end),
+            categoryId: (intv.categoryId && String(intv.categoryId).trim()) ? String(intv.categoryId).trim() : null,
+            note: intv.note ? String(intv.note) : ''
+          })).filter(intv => intv.start && intv.end);
+
+          if (!d.templateId || !state.templates.some(t => t.id === d.templateId)) {
+            d.templateId = state.templates[0].id;
+          }
+        });
+      }
+
+      if (state.days && Object.keys(state.days).length > 0) {
+        const dates = Object.keys(state.days).sort();
+        const today = dateToLocalISO(new Date());
+        state.selectedDate = state.days[today] ? today : dates[dates.length - 1];
+      }
+
+      return true;
+    }
+
+  async function readAppDataFromHandle(handle) {
+    try {
+      const fh = await handle.getFileHandle(APP_DATA_FILENAME, { create: false });
+      const file = await fh.getFile();
+      const text = await file.text();
+      return JSON.parse(text);
+    } catch (e) {
+      return null;
+    }
+  }
+
+  async function writeAppDataToHandle(handle, dataObj) {
+    const fh = await handle.getFileHandle(APP_DATA_FILENAME, { create: true });
+    const writable = await fh.createWritable();
+    await writable.write(JSON.stringify(dataObj, null, 2));
+    await writable.close();
+  }
+
+  function exportReferenceObject() {
+    const base = exportStateObject();
+    if (base && base.state) base.state.days = {};
+    return base;
+  }
+
+  async function writeMobileReferenceToRoot(rootHandle) {
+    try {
+      const syncDir = await rootHandle.getDirectoryHandle('mobile_sync');
+      const fh = await syncDir.getFileHandle(MOBILE_REFERENCE_FILENAME, { create: true });
+      const writable = await fh.createWritable();
+      await writable.write(JSON.stringify(exportReferenceObject(), null, 2));
+      await writable.close();
+    } catch (e) {}
+  }
+
+
+  async function saveDirectoryHandle(handle) {
+    await idbSet(IDB_KEY, handle);
+  }
+
+  async function loadDirectoryHandle() {
+    return await idbGet(IDB_KEY);
+  }
+
+  let persistTimer = null;
+  function schedulePersist() {
+    clearTimeout(persistTimer);
+    persistTimer = setTimeout(() => {
+      persist().catch(() => {});
+    }, 400);
+  }
+
+  async function persist() {
+    const handle = await loadDirectoryHandle();
+    if (!handle) { state._startupInfo = 'Auto-load: no saved folder'; return; }
+    const ok = await ensurePermission(handle, true);
+    if (!ok) return;
+    await writeAppDataToHandle(handle, exportStateObject());
+    if (!(typeof isMobile !== 'undefined' && isMobile)) {
+      await writeMobileReferenceToRoot(handle);
+    }
+  }
+
+  async function loadOnStartup() {
+    state._startupInfo = 'Auto-load: starting';
+    const handle = await loadDirectoryHandle();
+    if (!handle) { 
+      state._startupInfo = 'No folder selected yet';
+      state.dataLocation = 'Not set (click Pick Folder below)';
+      return; 
+    }
+
+    // Try read access; if not granted yet, request it so auto-load works.
+    let ok = await ensurePermission(handle, false);
+    if (!ok) ok = await ensurePermission(handle, true);
+    if (!ok) {
+      state.dataLocation = handle.name + ' (needs reconnect)';
+      state._startupInfo = 'Click Reconnect Folder button';
+      return;
+    }
+
+    const data = await readAppDataFromHandle(handle);
+    if (data && importStateObject(data)) {
+      state.dataLocation = handle.name;
+      state._startupInfo = 'Data loaded from ' + handle.name;
+      // Force a complete re-render with the loaded data
+      return true; // Signal that data was loaded
+    } else {
+      state.dataLocation = handle.name;
+      state._startupInfo = 'Folder connected (new tracker)';
+      // No existing file is okay - it will be created on first save
+    }
+    return false;
+  }
+
+  async function pickFolderAndActivate() {
+    if (!hasFSAccessAPI()) {
+      alert('Folder selection is not supported in your browser. Please use a modern browser like Chrome or Edge.');
+      return;
+    }
+    try {
+      const dirHandle = await window.showDirectoryPicker();
+      const ok = await ensurePermission(dirHandle, true);
+      if (!ok) {
+        alert('Permission was not granted for that folder.');
+        return;
+      }
+      await saveDirectoryHandle(dirHandle);
+      state.dataLocation = dirHandle.name;
+
+      const existing = await readAppDataFromHandle(dirHandle);
+      if (existing) {
+        // Load existing data
+        importStateObject(existing);
+        state._startupInfo = 'Loaded existing data from folder';
+      } else {
+        // Create new file with current data
+        await writeAppDataToHandle(dirHandle, exportStateObject());
+        state._startupInfo = 'Folder connected - data will auto-save';
+      }
+      // Force re-render to show updated status
+      render();
+    } catch (e) {
+      // user cancelled
+    }
+  }
+
+  async function reconnectFolder() {
+    // Just re-pick folder. This is the simplest reliable UX.
+    await pickFolderAndActivate();
+  }
+
+  async function backupToFolderOnly() {
+    const backup = exportStateObject();
+    const json = JSON.stringify(backup, null, 2);
+
+    const dirHandle = await loadDirectoryHandle();
+    if (!dirHandle) {
+      alert('No folder selected yet. Go to Settings / Data and click Select folder first.');
+      return;
+    }
+
+    const ok = await ensurePermission(dirHandle, true);
+    if (!ok) {
+      alert('Permission not granted. Click Select folder again to reconnect.');
+      return;
+    }
+
+    // Update canonical file
+    await writeAppDataToHandle(dirHandle, backup);
+
+    // Also write dated backup file (local date, and never overwrite: _1, _2, ...)
+    const dateStr = dateToLocalISO(new Date());
+    const baseName = `time-tracker-backup-${dateStr}`;
+
+    async function pickUniqueBackupName(dirHandle, base, ext) {
+      // Try base.ext, then base_1.ext, base_2.ext, ...
+      for (let i = 0; i < 1000; i++) {
+        const name = i === 0 ? `${base}.${ext}` : `${base}_${i}.${ext}`;
+        try {
+          await dirHandle.getFileHandle(name);
+        } catch (e) {
+          return name;
+        }
+      }
+      return `${base}_${Date.now()}.${ext}`;
+    }
+
+    const datedName = await pickUniqueBackupName(dirHandle, baseName, 'json');
+    const fileHandle = await dirHandle.getFileHandle(datedName, { create: true });
+    const writable = await fileHandle.createWritable();
+    await writable.write(json);
+    await writable.close();
+
+    alert('Backup saved to your selected folder.');
+  }
+
+  return {
+    loadDirectoryHandle,
+    exportStateObject,
+    loadOnStartup,
+    schedulePersist,
+    pickFolderAndActivate,
+    reconnectFolder,
+    backupToFolderOnly,
+    hasFSAccessAPI,
+  };
+
+// =====================
+// TTMobile (Mobile buffer persistence + Mobile Sync folder handle)
+// =====================
+const TTMobile = (() => {
+  const MOBILE_DAYS_KEY = 'tt_mobile_days_v1';
+  const IDB_DB = 'timeTrackerIdb';
+  const IDB_STORE = 'kv';
+  const IDB_MOBILE_SYNC_KEY = 'tt_mobile_sync_dirHandle_v1';
+  const MOBILE_BUFFER_FILENAME = 'mobile_buffer.json';
+  const MOBILE_REFERENCE_FILENAME = 'mobile_reference.json';
+  let persistTimer = null;
+
+  function hasFSAccessAPI() {
+    return (typeof window !== 'undefined') && ('showDirectoryPicker' in window);
+  }
+
+  function idbOpen() {
+    return new Promise((resolve, reject) => {
+      const req = indexedDB.open(IDB_DB, 1);
+      req.onupgradeneeded = () => {
+        const db = req.result;
+        if (!db.objectStoreNames.contains(IDB_STORE)) db.createObjectStore(IDB_STORE);
+      };
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = () => reject(req.error);
+    });
+  }
+
+  async function idbGet(key) {
+    const db = await idbOpen();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction(IDB_STORE, 'readonly');
+      const store = tx.objectStore(IDB_STORE);
+      const req = store.get(key);
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = () => reject(req.error);
+    });
+  }
+
+  async function idbSet(key, value) {
+    const db = await idbOpen();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction(IDB_STORE, 'readwrite');
+      const store = tx.objectStore(IDB_STORE);
+      const req = store.put(value, key);
+      req.onsuccess = () => resolve(true);
+      req.onerror = () => reject(req.error);
+    });
+  }
+
+  async function ensurePermission(handle, write) {
+    if (!handle) return false;
+    const opts = { mode: write ? 'readwrite' : 'read' };
+    try {
+      if (handle.queryPermission) {
+        const q = await handle.queryPermission(opts);
+        if (q === 'granted') return true;
+      }
+      if (handle.requestPermission) {
+        const r = await handle.requestPermission(opts);
+        return r === 'granted';
+      }
+    } catch (e) {
+      return false;
+    }
+    return false;
+  }
+
+  function loadDaysFromLocal() {
+    try {
+      const raw = localStorage.getItem(MOBILE_DAYS_KEY);
+      if (!raw) return false;
+      const days = JSON.parse(raw);
+      if (days && typeof days === 'object') {
+        state.days = days;
+        return true;
+      }
+    } catch (e) {}
+    return false;
+  }
+
+  function persistDaysToLocal() {
+    try {
+      localStorage.setItem(MOBILE_DAYS_KEY, JSON.stringify(state.days || {}));
+    } catch (e) {}
+  }
+
+  function schedulePersist() {
+    clearTimeout(persistTimer);
+    persistTimer = setTimeout(() => {
+      persistDaysToLocal();
+    }, 200);
+  }
+
+  function clearLocalBufferData() {
+    state.days = {};
+    persistDaysToLocal();
+  }
+
+  async function pickMobileSyncFolder() {
+    if (!hasFSAccessAPI()) {
+      alert('This mobile browser does not support folder-based saving.');
+      return null;
+    }
+    try {
+      const handle = await window.showDirectoryPicker();
+      const ok = await ensurePermission(handle, true);
+      if (!ok) {
+        alert('Permission was not granted for that folder.');
+        return null;
+      }
+      await idbSet(IDB_MOBILE_SYNC_KEY, handle);
+      return handle;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  async function loadMobileSyncFolderHandle(write=true) {
+    try {
+      const handle = await idbGet(IDB_MOBILE_SYNC_KEY);
+      if (!handle) return null;
+      const ok = await ensurePermission(handle, !!write);
+      if (!ok) return null;
+      return handle;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function exportMobileBufferObject() {
+    return { state: { days: state.days || {} }, exportedAt: new Date().toISOString() };
+  }
+
+  async function writeMobileBufferToSyncFolder() {
+    const dir = await loadMobileSyncFolderHandle(true);
+    if (!dir) return false;
+    const fh = await dir.getFileHandle(MOBILE_BUFFER_FILENAME, { create: true });
+    const writable = await fh.createWritable();
+    await writable.write(JSON.stringify(exportMobileBufferObject(), null, 2));
+    await writable.close();
+    return true;
+  }
+
+  async function clearMobileSyncFile() {
+    const dir = await loadMobileSyncFolderHandle(true);
+    if (!dir) return false;
+    const fh = await dir.getFileHandle(MOBILE_BUFFER_FILENAME, { create: true });
+    const writable = await fh.createWritable();
+    await writable.write(JSON.stringify({ state: { days: {} }, clearedAt: new Date().toISOString() }, null, 2));
+    await writable.close();
+    return true;
+  }
+
+  async function loadReferenceFromSyncFolder() {
+    const dir = await loadMobileSyncFolderHandle(false);
+    if (!dir) return false;
+    try {
+      const fh = await dir.getFileHandle(MOBILE_REFERENCE_FILENAME, { create: false });
+      const file = await fh.getFile();
+      const txt = await file.text();
+      const obj = JSON.parse(txt);
+      if (!obj || !obj.state) return false;
+
+      if (Array.isArray(obj.state.categories)) state.categories = obj.state.categories;
+      if (Array.isArray(obj.state.templates)) state.templates = obj.state.templates;
+      if (obj.state.selectedTemplateId) state.selectedTemplateId = obj.state.selectedTemplateId;
+      ensureDay(state.selectedDate);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  async function loadOnStartup() {
+    const hasDays = loadDaysFromLocal();
+    const hasRef = await loadReferenceFromSyncFolder();
+    state.dataLocation = hasDays ? 'Mobile buffer saved on this device' : 'Mobile buffer not saved yet (start entering time)';
+    state._startupInfo = (hasDays ? 'Mobile: loaded saved buffer' : 'Mobile: no saved buffer yet') + (hasRef ? ' + reference loaded' : '');
+    return hasDays || hasRef;
+  }
+
+  return {
+    loadOnStartup,
+    schedulePersist,
+    pickMobileSyncFolder,
+    writeMobileBufferToSyncFolder,
+    clearMobileSyncFile,
+    clearLocalBufferData,
+    loadReferenceFromSyncFolder,
+    hasFSAccessAPI,
+  };
+})();
+
+})();
+
+// Hook persistence into rendering (without rewriting the whole app)
+const __origRender = render;
+render = function() {
+  __origRender();
+  if (typeof isMobile !== "undefined" && isMobile) { TTMobile.schedulePersist(); } else { TTStorage.schedulePersist(); }
+};
+
+( (typeof isMobile !== 'undefined' && isMobile) ? TTMobile.loadOnStartup() : TTStorage.loadOnStartup() ).then((dataLoaded) => {
+  // Always render, but if data was loaded, make sure we're on the right view
+  if (dataLoaded && state.selectedView === 'settings') {
+    // If we loaded data but we're on settings, stay there
+    render();
+  } else if (dataLoaded) {
+    // Data loaded, show the day entry view with loaded data
+    state.selectedView = 'day-entry';
+    render();
+  } else {
+    // No data loaded (new user or no file), just render normally
+    render();
+  }
+}).catch(() => {
+  // If anything fails, still render the app
+  render();
+});
+
+  </script>
+</body>
+</html>
